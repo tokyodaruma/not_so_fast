@@ -10,10 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_04_101735) do
+ActiveRecord::Schema.define(version: 2022_08_04_105100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "care_receivers", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "chrome_id"
+    t.string "relationship"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "accessed_at"
+    t.text "description"
+    t.boolean "read"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
+  create_table "sites", force: :cascade do |t|
+    t.boolean "blocked"
+    t.boolean "trusted"
+    t.bigint "user_id", null: false
+    t.bigint "notification_id", null: false
+    t.text "reason"
+    t.string "url"
+    t.string "referral_site"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["notification_id"], name: "index_sites_on_notification_id"
+    t.index ["user_id"], name: "index_sites_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,4 +60,7 @@ ActiveRecord::Schema.define(version: 2022_08_04_101735) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "notifications", "users"
+  add_foreign_key "sites", "notifications"
+  add_foreign_key "sites", "users"
 end
