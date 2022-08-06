@@ -10,7 +10,6 @@ class NotificationPolicy < ApplicationPolicy
   end
 
   def create?
-    puts "HEY I'M HERE/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n/n"
     true
   end
 end
