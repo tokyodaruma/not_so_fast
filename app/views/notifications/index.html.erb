@@ -1,28 +1,25 @@
 <h1>My Notifications</h1>
 
-    <% @notifications.each do |notification| %>
-      <div class="container">
-        <div class="card-product">
-          <div class="col-6 flex-grow">
-            <div> <h2>Notification</h2>
-              <p><%= notification.description %></p>
-            </div>
-          </div>
-
-          <div class="col">
-            <div><h2>Access Date</h2>
-            <p> <%= notification.accessed_at.strftime("%F %H:%M")  %> </p></div>
-          </div>
-
-          <div class="col">
-            <div><h2>Status</h2>
-              <% if notification.read == "read" %>
-                <strong> <p style="color:gray">  Read </p> </strong>
-              <% else %>
-                <strong> <p style="color:red">  Unread </p> </strong>
-              <% end %>
-            </div>
-          </div>
-        </div>
+<% @notifications.each do |notification| %>
+  <div class="card-notification">
+    <div class="card-notification-infos">
+      <h2>Notification</h2>
+      <p><%= notification.description %></p>
+      <h2 class="card-notification-infos-status">
+          <% if notification.read == "read" %>
+            <strong> <p style="color:gray">  Read </p> </strong>
+          <% else %>
+            <strong> <p style="color:red">  Unread </p> </strong>
+          <% end %>
+      </h2>
+    </div>
+    <div class="card-notification-site">
+      <div>
+        <h2>Site</h2>
+        <p><%= notification.site.url  %></p>
       </div>
-    <% end %>
+      <h2 class="card-otification-site-accessdate">accessed at<%= notification.accessed_at.strftime("%F %H:%M")  %>
+      </h2>
+    </div>
+  </div>
+<% end %>
