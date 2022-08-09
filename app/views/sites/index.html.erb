@@ -1,0 +1,79 @@
+<div class="wrapper">
+  <div class="tabs">
+    <div class="tab">
+      <input type="radio" name="css-tabs" id="tab-1" checked class="tab-switch">
+      <label for="tab-1" class="tab-label">Block</label>
+      <div class="tab-content">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Referral Site</th>
+              <th scope="col">Reason</th>
+              <th scope="col">Url</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @blocked_sites.each_with_index do |site, index| %>
+            <tr>
+              <th scope="row"><%= index + 1 %></th>
+              <td><%= site.referral_site %> </td>
+              <td><%= site.reason %> </td>
+              <td><%= site.url %> </td>
+            </tr>
+          </tbody><% end %>
+        </table>
+      </div>
+    </div>
+    <div class="tab">
+      <input type="radio" name="css-tabs" id="tab-2" checked class="tab-switch">
+      <label for="tab-2" class="tab-label">Trust</label>
+      <div class="tab-content">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Referral Site</th>
+              <th scope="col">Reason</th>
+              <th scope="col">Url</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @trusted_sites.each_with_index do |site, index| %>
+            <tr>
+              <th scope="row"><%= index + 1 %></th>
+              <td><%= site.referral_site %> </td>
+              <td><%= site.reason %> </td>
+              <td><%= site.url %> </td>
+            </tr>
+          </tbody><% end %>
+        </table>
+      </div>
+    </div>
+    <div class="tab">
+      <input type="radio" name="css-tabs" id="tab-3" checked class="tab-switch">
+      <label for="tab-3" class="tab-label">Review</label>
+      <div class="tab-content">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Referral Site</th>
+              <th scope="col">Reason</th>
+              <th scope="col">Url</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @trusted_sites.each_with_index do |site, index| %>
+            <tr>
+              <th scope="row"><%= index + 1 %></th>
+              <td><%= site.referral_site %> </td>
+              <td><%= site.reason %> </td>
+              <td><%= site.url %> </td>
+            </tr>
+          </tbody><% end %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
