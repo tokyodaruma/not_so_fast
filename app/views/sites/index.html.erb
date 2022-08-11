@@ -1,79 +1,145 @@
-<div class="wrapper">
-  <div class="tabs">
-    <div class="tab">
-      <input type="radio" name="css-tabs" id="tab-1" checked class="tab-switch">
-      <label for="tab-1" class="tab-label">Block</label>
-      <div class="tab-content">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Referral Site</th>
-              <th scope="col">Reason</th>
-              <th scope="col">Url</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @blocked_sites.each_with_index do |site, index| %>
-            <tr>
-              <th scope="row"><%= index + 1 %></th>
-              <td><%= site.referral_site %> </td>
-              <td><%= site.reason %> </td>
-              <td><%= site.url %> </td>
-            </tr>
-          </tbody><% end %>
-        </table>
-      </div>
-    </div>
-    <div class="tab">
-      <input type="radio" name="css-tabs" id="tab-2" checked class="tab-switch">
-      <label for="tab-2" class="tab-label">Trust</label>
-      <div class="tab-content">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Referral Site</th>
-              <th scope="col">Reason</th>
-              <th scope="col">Url</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @trusted_sites.each_with_index do |site, index| %>
-            <tr>
-              <th scope="row"><%= index + 1 %></th>
-              <td><%= site.referral_site %> </td>
-              <td><%= site.reason %> </td>
-              <td><%= site.url %> </td>
-            </tr>
-          </tbody><% end %>
-        </table>
-      </div>
-    </div>
-    <div class="tab">
-      <input type="radio" name="css-tabs" id="tab-3" checked class="tab-switch">
-      <label for="tab-3" class="tab-label">Review</label>
-      <div class="tab-content">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Referral Site</th>
-              <th scope="col">Reason</th>
-              <th scope="col">Url</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @trusted_sites.each_with_index do |site, index| %>
-            <tr>
-              <th scope="row"><%= index + 1 %></th>
-              <td><%= site.referral_site %> </td>
-              <td><%= site.reason %> </td>
-              <td><%= site.url %> </td>
-            </tr>
-          </tbody><% end %>
-        </table>
-      </div>
-    </div>
+<ul class="nav tabs-underlined" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <span class="nav-link tab-underlined active" id="block-tab" data-bs-toggle="tab" data-bs-target="#block-tab-pane" role="tab" aria-controls="block-tab-pane" aria-selected="true">Block</span>
+  </li>
+  <li class="nav-item" role="presentation">
+    <span class="nav-link tab-underlined" id="trust-tab" data-bs-toggle="tab" data-bs-target="#trust-tab-pane" role="tab" aria-controls="trust-tab-pane" aria-selected="false">Trust</span>
+  </li>
+  <li class="nav-item" role="presentation">
+    <span class="nav-link tab-underlined" id="review-tab" data-bs-toggle="tab" data-bs-target="#review-tab-pane" role="tab" aria-controls="review-tab-pane" aria-selected="false">Review</span>
+  </li>
+</ul>
+
+<!-- Blocked sites -->
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade py-3 show active" id="block-tab-pane" role="tabpanel" aria-labelledby="block-tab" tabindex="0">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Referral Site</th>
+          <th scope="col">Reason</th>
+          <th scope="col">Url</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @blocked_sites.each_with_index do |site, index| %>
+          <tr>
+            <th scope="row"><%= index + 1 %></th>
+            <td><%= site.referral_site %> </td>
+            <td><%= site.reason %> </td>
+            <td><%= site.url %> </td>
+            <td>
+              <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#site-<%= site.id %>">
+                <i class="fas fa-edit"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        <!-- Modal -->
+        <%= render 'modal', site: site %>
+      <% end %>
+    </table>
   </div>
-</div>
+  <!-- Trusted sites -->
+  <div class="tab-pane fade py-3" id="trust-tab-pane" role="tabpanel" aria-labelledby="trust-tab" tabindex="1">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Referral Site</th>
+          <th scope="col">Reason</th>
+          <th scope="col">Url</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @trusted_sites.each_with_index do |site, index| %>
+          <tr>
+            <th scope="row"><%= index + 1 %></th>
+            <td><%= site.referral_site %> </td>
+            <td><%= site.reason %> </td>
+            <td><%= site.url %> </td>
+            <td>
+              <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#site-<%= site.id %>">
+                <i class="fas fa-edit"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        <!-- Modal -->
+          <div class="modal fade" id="site-<%= site.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Edit Site</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <%= render 'form', site: site %>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </table>
+  </div>
+
+  <!-- Review sites-->
+  <div class="tab-pane fade py-3" id="review-tab-pane" role="tabpanel" aria-labelledby="review-tab" tabindex="3">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Referral Site</th>
+          <th scope="col">Reason</th>
+          <th scope="col">Url</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @review_sites.each_with_index do |site, index| %>
+          <tr>
+            <th scope="row"><%= index + 1 %></th>
+            <td><%= site.referral_site %></td>
+            <td><%= site.reason %></td>
+            <td><%= site.url %></td>
+            <td>
+              <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#site-<%= site.id %>">
+                <i class="fas fa-edit"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+        <!-- Modal -->
+          <div class="modal fade" id="site-<%= site.id %>"tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Edit Site</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <%= render 'form', site: site %>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="container">
+    <% if policy(Site).create? %>
+      <%= link_to "New site", new_site_path, class: "btn btn-primary" %>
+    <% end %>
+  </div>
