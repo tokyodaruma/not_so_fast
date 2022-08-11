@@ -1,20 +1,16 @@
-.card-product {
+.card-notification {
   overflow: hidden;
-  height: 120px;
   background: white;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  display: flex;
-  align-items: center;
-  margin-bottom: 16px;
-  font-family: "Nunito", "Helvetica", "sans-serif";
-  flex-grow: 1;
+  box-shadow: 0 0 15px rgba(9, 9, 9, 0.2);
+  padding: 16px;
+  margin: 16px;
+  border-radius: 10px;
 }
 
-.card-product h2 {
+.card-notification h2 {
   font-size: 16px;
   font-weight: bold;
   margin: 0;
-  font-family: "Nunito", "Helvetica", "sans-serif";
 }
 
 .card-product p {
@@ -34,7 +30,41 @@
 
 .flex-grow {
   flex-grow: 1;
+}  
+  
+.card-notification .card-notification-infos {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
 }
+
+.card-notification .card-notification-site {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+}
+
+.card-notification .card-notification-infos-status {
+  padding: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+}
+
+.card-notification .card-notification-site-accessdate {
+  padding: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+}
+
+
 
 // Smallest device
 @media (min-width: 100px) and (max-width: 575px) {

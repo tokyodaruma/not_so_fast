@@ -2,6 +2,7 @@ require 'faker'
 
 puts "clearing seeds"
 
+CareReceiver.destroy_all
 Site.destroy_all
 Notification.destroy_all
 User.destroy_all
@@ -50,6 +51,43 @@ zach.save!
 
 puts "#{satoka.first_name}, #{jennifer.first_name}, #{antonio.first_name}, #{zach.first_name} made."
 
+puts "Creating Carereceivers"
+  satoka_grandma = CareReceiver.new(
+    first_name: "Grandma",
+    last_name: "Satome",
+    chrome_id: "123456",
+    relationship: "Grandma",
+    user_id: satoka.id
+  )
+  satoka_grandma.save!
+
+  jennifer_grandma = CareReceiver.new(
+    first_name: "Grandma",
+    last_name: "Nakayama",
+    chrome_id: "123457",
+    relationship: "Grandma",
+    user_id: jennifer.id
+  )
+  jennifer_grandma.save! # .save  should it ends with ! <= ??
+
+  antonio_grandma = CareReceiver.new(
+    first_name: "Grandma",
+    last_name: "Jurado",
+    chrome_id: "123458",
+    relationship: "Grandma",
+    user_id: satoka.id
+  )
+  antonio_grandma.save!
+
+  zach_grandma = CareReceiver.new(
+    first_name: "Grandma",
+    last_name: "Carter",
+    chrome_id: "123459",
+    relationship: "Grandma",
+    user_id: zach.id
+  )
+  zach_grandma.save!
+
 10.times do
   chosen_user = [satoka, jennifer, zach, antonio].sample
   notification = Notification.new(
@@ -74,4 +112,5 @@ puts "#{satoka.first_name}, #{jennifer.first_name}, #{antonio.first_name}, #{zac
   site.save!
 
   puts "Notification ##{notification.id} and Site ##{site.id} made."
+
 end

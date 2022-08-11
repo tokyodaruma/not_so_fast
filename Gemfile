@@ -25,6 +25,9 @@ gem 'redis', '~> 4.0'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
+# additional devise gem
+gem 'simple_token_authentication'
+
 # add faker to gemfile
 gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
 

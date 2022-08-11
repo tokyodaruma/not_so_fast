@@ -4,4 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_one_attached :photo
+  acts_as_token_authenticatable
+  has_one :care_receiver
 end
