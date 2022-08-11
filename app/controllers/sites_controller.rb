@@ -1,36 +1,57 @@
 class SitesController < ApplicationController
+  before_action :set_site, only: %i[update]
 
   def index
     @sites = policy_scope(Site)
     @blocked_sites = @sites.where(blocked: true)
     @trusted_sites = @sites.where(blocked: false)
+    @review_sites = @sites.where(blocked: false, trust_with_popup: false)
   end
 
+  def new
+    @site = Site.new
+    authorize @site
+  end
+
+  # POST /sites
   def create
     @notification = Notification.find(params[:notification_id])
     @site = Site.new(site_params)
-    @notification.site = @notification
+    @site.notification = @notification
     @site.user = current_user
+
+    # Twilio call
     if @site.save
-      redirect_to sites_path
+      SendSmsService.new('WARNING: Security Alert for Grandma has been activated.
+        Check your NotSoFast app for more information.').call
+      redirect_to "/"
     else
-      render 'notifications/show'
+      @errors = @user.errors.full_messages
     end
     authorize @site
   end
 
+  def edit
+  end
+
+  # PATCH/PUT /sites/1
   def update
-    @site = site.find(params[:id])
+
     if @site.update(site_params)
-      redirect_to sites_path
+      redirect_to sites_path, notice: 'Site was successfully updated.'
     else
-      render 'sites/index'
+      render :edit
     end
   end
 
   private
 
+  def set_site
+    @site = Site.find(params[:id])
+    authorize @site
+  end
+
   def site_params
-    params.require(:site).permit(:blocked, :trust_with_popup, :reason)
+    params.require(:site).permit(:blocked, :trust_with_popup, :reason, :url)
   end
 end
