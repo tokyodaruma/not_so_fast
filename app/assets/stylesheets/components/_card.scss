@@ -1,10 +1,22 @@
+.cards {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  padding: 16px;
+}
+
 .card-notification {
   overflow: hidden;
   background: white;
   box-shadow: 0 0 15px rgba(9, 9, 9, 0.2);
-  padding: 16px;
-  margin: 16px;
+  // padding: 16px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
   border-radius: 10px;
+  width: 100%;
 }
 
 .card-notification h2 {
@@ -34,10 +46,10 @@
   
 .card-notification .card-notification-infos {
   padding: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  position: relative;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: space-between;
+  // align-items: flex-end;
 }
 
 .card-notification .card-notification-site {
@@ -45,7 +57,6 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  position: relative;
 }
 
 .card-notification .card-notification-infos-status {
@@ -53,7 +64,6 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  position: relative;
 }
 
 .card-notification .card-notification-site-accessdate {
@@ -61,42 +71,50 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  position: relative;
 }
 
 
 
-// Smallest device
-@media (min-width: 100px) and (max-width: 575px) {
-  .cards {
-    grid-template-columns: 1fr;
-  }
-}
+// // Smallest device
+// @media (min-width: 100px) and (max-width: 575px) {
+//   .cards {
+//     width: 100%;
+//   }
+// }
 
 // Small devices (landscape phones, 576px and up)
 @media (min-width: 576px) {
   .cards {
-    grid-template-columns: 1fr;
+    width: 600px;
+  }
+  .card-notification-infos {
+    display: flex;
+    justify-content: space-between;
   }
 }
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {
   .cards {
-    grid-template-columns: 1fr 1fr;
+    width: 800px;
+  }
+  .card-notification-infos {
   }
 }
 
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {
   .cards {
-    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .card-notification-infos {
+    justify-content: space-between;
   }
 }
 
 // Extra large devices (large desktops, 1200px and up)
 @media (min-width: 1200px) {
   .cards {
-    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .card-notification-infos {
   }
 }
