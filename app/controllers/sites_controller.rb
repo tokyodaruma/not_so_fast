@@ -38,7 +38,7 @@ class SitesController < ApplicationController
   def update
 
     if @site.update(site_params)
-      redirect_to @site, notice: 'Site was successfully updated.'
+      redirect_to sites_path, notice: 'Site was successfully updated.'
     else
       render :edit
     end
