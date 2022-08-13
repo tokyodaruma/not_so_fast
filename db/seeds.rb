@@ -77,7 +77,7 @@ puts "Creating Carereceivers"
     last_name: "Jurado",
     chrome_id: "123458",
     relationship: "Grandma",
-    user_id: satoka.id
+    user_id: antonio.id
   )
   antonio_grandma.save!
 
