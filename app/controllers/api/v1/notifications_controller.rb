@@ -1,6 +1,7 @@
 class Api::V1::NotificationsController < Api::V1::BaseController
   acts_as_token_authentication_handler_for User, except: %i[index]
   before_action :set_notification, only: %i[update]
+  before_action :set_params, only: %i[create]
 
   def index
     @notifications = policy_scope(Notification)
@@ -15,10 +16,14 @@ class Api::V1::NotificationsController < Api::V1::BaseController
   end
 
   def create
-    @notification = Notification.new(notification_params)
+    @notification = Notification.new(@notification_params)
     @notification.user = current_user
+    @site = Site.new(@site_params)
+    @site.notification = @notification
+    @site.user = current_user
     authorize @notification
     if @notification.save
+      @site.save
       render :index, status: :created
     else
       render_error
@@ -32,8 +37,10 @@ class Api::V1::NotificationsController < Api::V1::BaseController
     authorize @notification
   end
 
-  def notification_params
-    params.require(:notification).permit(:accessed_at, :description, :read)
+  def set_params
+    @notification_params, @site_params = params.require(%i[notification site])
+    @notification_params = @notification_params.permit(:accessed_at, :description, :read)
+    @site_params = @site_params.permit(:url, :reason, :referral_site, :notification_id)
   end
 
   def render_error

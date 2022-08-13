@@ -3,7 +3,7 @@ const isoDateString = new Date().toISOString();
 
 const myHeaders = new Headers({
   'Content-Type': 'application/json',
-  'Authorization': 'wosGYhyXq734unPsyxBM'
+  'Authorization': 'haSiFxuWvwf8B2nLg2cM'
 });
 
 const notification = {
@@ -12,13 +12,19 @@ const notification = {
       "accessed_at": isoDateString,
       "read": false,
       "description": `Accessed ${targetUrl}`
+  },
+
+  "site":
+  {
+    "url": `${targetUrl}`,
+    "reason": `Accessed ${targetUrl}`,
+    "referral_site": `${targetUrl}`
   }
 }
 
-const request = new Request('http://localhost:3000/api/v1/notifications', {
+const request = new Request('https://www.notsofast.co/api/v1/notifications', {
   method: 'POST',
   headers: myHeaders,
-  mode: 'cors',
   body: JSON.stringify(notification)
  });
 

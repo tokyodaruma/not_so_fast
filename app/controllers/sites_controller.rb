@@ -6,6 +6,7 @@ class SitesController < ApplicationController
     @blocked_sites = @sites.where(blocked: true, trust_with_popup: false)
     @trusted_sites = @sites.where(blocked: false, trust_with_popup: true)
     @review_sites = @sites.where(blocked: false, trust_with_popup: false)
+    @new_site = Site.new
   end
 
   def new

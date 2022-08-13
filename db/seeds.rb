@@ -77,7 +77,7 @@ puts "Creating Carereceivers"
     last_name: "Jurado",
     chrome_id: "123458",
     relationship: "Grandma",
-    user_id: satoka.id
+    user_id: antonio.id
   )
   antonio_grandma.save!
 
@@ -90,17 +90,27 @@ puts "Creating Carereceivers"
   )
   zach_grandma.save!
 
+scam_url = 'https://fastspecialists.info/oop/9989_md/10/221/3591/17/5316583'
+api_key = ENV['APIVOID_KEY']
+request = "https://endpoint.apivoid.com/urlrep/v1/pay-as-you-go/?key=#{api_key}&url=#{scam_url}"
+risk_results_serialized = URI.parse(request).open.read
+results = JSON.parse(risk_results_serialized)
+
 10.times do
   chosen_user = [satoka, jennifer, zach, antonio].sample
   notification = Notification.new(
     user_id: chosen_user.id,
-    accessed_at: Faker::Date.between(from: '2022-08-04', to: '2022-09-03'),
+    accessed_at: results["data"]["report"]["response_headers"]["date"],
     description: Faker::Lorem.paragraph,
     read: Faker::Boolean.boolean,
     created_at: Faker::Date.between(from: '2022-08-04', to: '2022-09-03'),
     updated_at: Faker::Date.between(from: '2022-08-04', to: '2022-09-03')
   )
   notification.save!
+
+  puts 'Wiping database'
+  Site.destroy_all
+  puts 'Planting new seeds'
 
   site = Site.new(
     blocked: Faker::Boolean.boolean,
@@ -109,10 +119,11 @@ puts "Creating Carereceivers"
     notification_id: notification.id,
     reason: Faker::Lorem.sentence,
     url: Faker::Internet.url,
-    referral_site: Faker::Internet.url
+    referral_site: Faker::Internet.url,
+    detections: results["data"]["report"]["domain_blacklist"]["detections"],
+    risk_score: results["data"]["report"]["risk_score"]["result"]
   )
   site.save!
 
   puts "Notification ##{notification.id} and Site ##{site.id} made."
-
 end

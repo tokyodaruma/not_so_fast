@@ -25,6 +25,9 @@ gem 'redis', '~> 4.0'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
+# fix cors issue
+gem 'rack-cors'
+
 # additional devise gem
 gem 'simple_token_authentication'
 
@@ -75,4 +78,3 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'cloudinary', '~> 1.16.0'
 
 gem 'twilio-ruby', '~> 5.70.0'
-

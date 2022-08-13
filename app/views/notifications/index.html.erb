@@ -23,27 +23,7 @@
         </div>
       </div>
     <!-- Modal -->
-      <div class="modal fade" id="notification-<%= notification.id %>" tabindex="-1" aria-labelledby="notification-<%= notification.id %>Label" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="notification-<%= notification.id %>">Site URL</h5>
-              <p><%= notification.site.url %></p>
-            </div>
-            <div class="modal-header">
-              <h5 class="modal-title" id="notification-<%= notification.id %>">Accessed at</h5>
-              <p><%= notification.accessed_at.strftime("%F %H:%M") %></p>
-            </div>
-            <div class="modal-body">
-              <p>Which action would you like to take on this site?</p>
-            </div>
-            <div class="modal-footer">
-              <a href="#" class="btn btn-danger" data-bs-dismiss="modal">BLOCK</a>
-              <a class="btn btn-success">TRUST</a>
-            </div>
-          </div>
-        </div>
-      </div>
+    <%= render 'modal', notification: notification %>
     </div>
   <% end %>
 </div>
