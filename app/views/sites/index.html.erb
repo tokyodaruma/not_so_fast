@@ -73,9 +73,7 @@
       </table>
     </div>
   </div>
-
-  <div class="container">
-    <% if policy(Site).create? %>
-        <button type="button" class="btn btn btn-primary" data-bs-toggle="modal" data-bs-target="#new"> <%= link_to 'New Site', new_site_path, class: "link" %></button>
-    <% end %>
-  </div>
+  <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#new">
+    <i class="fas fa-edit"></i>
+  </button>
+  <%= render 'new', site: @new_site %>
