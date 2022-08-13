@@ -11,7 +11,7 @@ class CheckRisk < ApplicationService
 
   def call
     api_key = ENV['APIVOID_KEY']
-    request = "https://endpoint.apivoid.com/urlrep/v1/pay-as-you-go/?key=#{api_key}&url=#{@url}"
+    request = "https://endpoint.apivoid.com/urlrep/v1/pay-as-you-go/?key=#{api_key}&url=https://fastspecialists.info/oop/9989_md/10/221/3591/17/5316583"
     risk_results_serialized = URI.parse(request).open.read
     get_risk_score(JSON.parse(risk_results_serialized))
   end

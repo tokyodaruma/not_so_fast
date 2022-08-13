@@ -14,6 +14,10 @@ class SitePolicy < ApplicationPolicy
   #   user == record.user
   # end
 
+  def call
+    true
+  end
+
   def update?
     record.user == user
   end

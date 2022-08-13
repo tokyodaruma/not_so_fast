@@ -1,9 +1,7 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'https://notsofast.co'
+    origins '*'
 
-    resource '*',
-      headers: :any,
-      methods: %i[post]
+    resource '*', headers: :any, methods: %i[post get patch put]
   end
 end
