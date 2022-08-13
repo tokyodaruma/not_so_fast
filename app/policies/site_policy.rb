@@ -5,4 +5,12 @@ class SitePolicy < ApplicationPolicy
       scope.all
     end
   end
+
+  def update?
+    record.user == user
+  end
+
+  def create?
+    true
+  end
 end

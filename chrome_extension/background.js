@@ -1,9 +1,6 @@
-function changeBackgroundColor() {
-  document.body.style.backgroundColor = "#C3413B";
+async function getCurrentTab() {
+  let queryOptions = { active: true, lastFocusedWindow: true };
+  let [tab] = await chrome.tabs.query(queryOptions);
+  return tab.url;
 }
-chrome.action.onClicked.addListener((tab) => {
-  chrome.scripting.executeScript({
-    target: {tabId: tab.id},
-    function: changeBackgroundColor,
-  });
-});
+console.log(getCurrentTab());

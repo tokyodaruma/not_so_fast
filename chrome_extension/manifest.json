@@ -1,7 +1,7 @@
 {
   "name": "notsofast extension",
   "version": "1.0",
-  "description": "Build an Extension!",
+  "description": "Check user's current URL",
   "manifest_version": 3,
   "background": {
     "service_worker": "background.js"
@@ -13,5 +13,11 @@
   ],
   "action": {
 
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content-script.js"]
+    }
+  ]
 }
