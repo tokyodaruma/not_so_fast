@@ -3,7 +3,7 @@ class SitesController < ApplicationController
 
   def index
     @sites = policy_scope(Site)
-    @blocked_sites = @sites.where(blocked: true)
+    @blocked_sites = @sites.where(blocked: true, trust_with_popup: false)
     @trusted_sites = @sites.where(blocked: false, trust_with_popup: true)
     @review_sites = @sites.where(blocked: false, trust_with_popup: false)
   end
