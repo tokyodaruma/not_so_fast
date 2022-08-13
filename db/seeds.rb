@@ -108,15 +108,11 @@ results = JSON.parse(risk_results_serialized)
   )
   notification.save!
 
-  puts 'Wiping database'
-  Site.destroy_all
-  puts 'Planting new seeds'
-
   site = Site.new(
     blocked: Faker::Boolean.boolean,
     trust_with_popup: Faker::Boolean.boolean,
     user_id: chosen_user.id,
-    notification_id: notification.id,
+    notification: notification,
     reason: Faker::Lorem.sentence,
     url: Faker::Internet.url,
     referral_site: Faker::Internet.url,
