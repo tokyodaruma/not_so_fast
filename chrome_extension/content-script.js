@@ -3,7 +3,7 @@ const isoDateString = new Date().toISOString();
 
 const myHeaders = new Headers({
   'Content-Type': 'application/json',
-  'Authorization': 'c-QqLsd_tpxpZU3CiRPk',
+  'X-User-Token': 'c-QqLsd_tpxpZU3CiRPk',
   'X-User-Email': "fake@fake.me"
 });
 
