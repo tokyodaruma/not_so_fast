@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       resources :sites, :notifications, only: %i[index update create]
+      post 'sites/risk-check', to: 'sites#call'
     end
   end
 end
