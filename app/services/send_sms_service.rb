@@ -1,6 +1,8 @@
 require 'twilio-ruby'
 
-class SendSmsService
+class SendSmsService < ApplicationService
+  attr_reader :message
+
   def initialize(message)
     @message = message
     # probably pass in the user as well so you can get the phone number?

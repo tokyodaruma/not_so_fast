@@ -6,5 +6,4 @@ class Site < ApplicationRecord
   validates :trust_with_popup, inclusion: [true, false]
   validates :reason, presence: true
   validates :url, presence: true
-  validates :referral_site, presence: true
 end
