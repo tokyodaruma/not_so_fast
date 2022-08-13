@@ -8,11 +8,11 @@ class SendSmsService < ApplicationService
     # probably pass in the user as well so you can get the phone number?
   end
 
-  def call
+  def call(phone_number)
     client = Twilio::REST::Client.new(ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN'])
     client.messages.create(
       from: ENV['TWILIO_NUMBER'], # Your Twilio number
-      to: '+8109056080842', # User mobile phone number
+      to: phone_number, # User mobile phone number
       body: @message
     )
   end
