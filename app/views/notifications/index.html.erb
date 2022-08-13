@@ -1,6 +1,7 @@
 <div class="cards">
-  <% @notifications.each do |notification| %>
-  <div type="button" data-bs-toggle="modal" data-bs-target="#notification-<%= notification.id %>">
+  <% if @notifications.any? %>
+    <% @notifications.each do |notification| %>
+    <div type="button" data-bs-toggle="modal" data-bs-target="#notification-<%= notification.id %>">
       <div class="card-notification">
         <div class="card-notification-infos">
           <h2>Notification</h2>
@@ -25,5 +26,8 @@
     <!-- Modal -->
     <%= render 'modal', notification: notification %>
     </div>
+    <% end %>
+  <% else %>
+    <h2>No notifications yet.</h2>
   <% end %>
 </div>
