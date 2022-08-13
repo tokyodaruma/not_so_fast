@@ -1,4 +1,6 @@
 require 'faker'
+require 'json'
+require 'open-uri'
 
 puts "clearing seeds"
 
