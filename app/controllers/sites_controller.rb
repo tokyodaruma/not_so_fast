@@ -10,6 +10,12 @@ class SitesController < ApplicationController
 
   def new
     @site = Site.new
+
+    if @site.save
+      redirect_to sites_path, notice: 'Site was successfully created.'
+    else
+      render :new
+    end
     authorize @site
   end
 

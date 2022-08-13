@@ -68,78 +68,14 @@
           </tr>
         </tbody>
         <!-- Modal -->
-          <div class="modal fade" id="site-<%= site.id %>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Edit Site</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <%= render 'form', site: site %>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      </table>
-  </div>
-
-  <!-- Review sites-->
-  <div class="tab-pane fade py-3" id="review-tab-pane" role="tabpanel" aria-labelledby="review-tab" tabindex="3">
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Referral Site</th>
-          <th scope="col">Reason</th>
-          <th scope="col">Url</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @review_sites.each_with_index do |site, index| %>
-          <tr>
-            <th scope="row"><%= index + 1 %></th>
-            <td><%= site.referral_site %></td>
-            <td><%= site.reason %></td>
-            <td><%= site.url %></td>
-            <td>
-              <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#site-<%= site.id %>">
-                <i class="fas fa-edit"></i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-        <!-- Modal -->
-          <div class="modal fade" id="site-<%= site.id %>"tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Edit Site</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <%= render 'form', site: site %>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-              </div>
-            </div>
-          </div>
+        <%= render 'modal', site: site %>
         <% end %>
       </table>
     </div>
-
   </div>
 
   <div class="container">
     <% if policy(Site).create? %>
-      <%= link_to "New site", new_site_path, class: "btn btn-primary" %>
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#new"> <%= link_to 'New Site', new_site_path %></button>
     <% end %>
   </div>

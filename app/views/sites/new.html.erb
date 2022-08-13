@@ -1,1 +1,24 @@
-<%= render 'form', site: @site %>
+        <div class="modal fade" id="new" tabindex="-1" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New Site</h5>
+              </div>
+                <%= simple_form_for @site do |f| %>
+                  <div class="modal-body">
+                    <div class="form-inputs">
+                      <%= f.input :referral_site, as: :text %>
+                      <%= f.input :reason, as: :text %>
+                      <%= f.input :url, as: :text %>
+                      <%= f.input :blocked, label: "Block?", as: :radio_buttons %>
+                      <%= f.input :trust_with_popup, label: "Trust?", as: :radio_buttons %>
+                    </div>
+                    <div class="modal-footer form-actions">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <%= f.submit "Submit", class: 'btn btn-primary' %>
+                    </div>
+                  </div>
+                <% end %>
+            </div>
+          </div>
+        </div>
