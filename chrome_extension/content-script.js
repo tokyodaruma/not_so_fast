@@ -22,7 +22,7 @@ const notification = {
   }
 }
 
-const request = new Request('https://notsofast.co/api/v1/notifications', {
+const request = new Request('https://www.notsofast.co/api/v1/notifications', {
   method: 'POST',
   headers: myHeaders,
   body: JSON.stringify(notification)
