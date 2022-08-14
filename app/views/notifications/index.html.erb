@@ -3,24 +3,18 @@
     <% @notifications.each do |notification| %>
     <div type="button" data-bs-toggle="modal" data-bs-target="#notification-<%= notification.id %>">
       <div class="card-notification">
-        <div class="card-notification-infos">
-          <h2>Notification</h2>
+        <div class="card-notification-infos justify-content-center">
           <p><%= notification.description %></p>
-          <h2 class="card-notification-infos-status">
-              <% if notification.read == "read" %>
-                <strong> <p style="color:gray">  Read </p> </strong>
-              <% else %>
-                <strong> <p style="color:red">  Unread </p> </strong>
-              <% end %>
-          </h2>
         </div>
         <div class="card-notification-site">
-          <div>
-            <h2>Site</h2>
+          <div class="card-notification-site-url">
+            <h2>URL:</h2>
             <p><%= notification.site.url  %></p>
           </div>
-          <h2 class="card-otification-site-accessdate">accessed at <%= notification.accessed_at.strftime("%F %H:%M")  %>
-          </h2>
+          <div class="card-notification-site-accessdate">
+            <h2> Accessed at:</h2>
+            <p><%= notification.accessed_at.strftime("%F %H:%M")  %></p>
+          </div>
         </div>
       </div>
     <!-- Modal -->
