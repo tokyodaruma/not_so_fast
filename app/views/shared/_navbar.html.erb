@@ -1,6 +1,6 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+<div class="navbar navbar-expand-sm navbar-light navbar">
   <%= link_to "#", class: "navbar-brand" do%>
-    <% if user_signed_in? %>
+    <% if user_signed_in? && !current_user.care_receiver.nil? %>
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <h3> GRANDMA <%= current_user.care_receiver.last_name.upcase %></h3>
@@ -16,14 +16,17 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <% if user_signed_in? %>
-
-
+      <% if user_signed_in? && !current_user.care_receiver.nil? %>
         <li class="nav-item dropdown">
-          <%= image_tag "grandma.jpg", class: "avatar dropdown-toggle", role: "button",data: { "bs-toggle": "dropdown" }, 'aria-expanded': false %>
+          <% if @notifications.empty? %>
+            <%= image_tag "grandma.jpg", class: "avatar-bordered-safe dropdown-toggle", role: "button",data: { "bs-toggle": "dropdown" }, 'aria-expanded': false %>
+          <% else %>
+            <%= image_tag "grandma.jpg", class: "avatar-bordered-alert dropdown-toggle", role: "button",data: { "bs-toggle": "dropdown" }, 'aria-expanded': false %>
+          <% end %>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
-            <li><%= link_to "Action", "#", class: "dropdown-item" %></li>
+            <li><%= link_to "Sites", sites_path, class: "dropdown-item" %></li>
+            <li><%= link_to "Notifications", notifications_path, class: "dropdown-item" %></li>
           </ul>
         </li>
       <% else %>
