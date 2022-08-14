@@ -7,6 +7,7 @@ class SitesController < ApplicationController
     @trusted_sites = @sites.where(blocked: false, trust_with_popup: true)
     @review_sites = @sites.where(blocked: false, trust_with_popup: false)
     @new_site = Site.new
+    @notifications = policy_scope(Notification).order(accessed_at: :desc)
   end
 
   def new

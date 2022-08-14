@@ -6,12 +6,22 @@
   width: 56px;
   border-radius: 50%;
 }
-.avatar-bordered {
-  width: 40px;
+.avatar-bordered-safe {
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-  border: white 1px solid;
+  object-fit: cover;
+  border: solid 4px #7BB562;
 }
+
+.avatar-bordered-alert {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: solid 4px #FFD301;
+}
+
 .avatar-square {
   width: 40px;
   border-radius: 0px;
