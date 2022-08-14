@@ -6,13 +6,18 @@
           <h3> GRANDMA <%= current_user.care_receiver.last_name.upcase %></h3>
         </li>
       </ul>
+    <% else %>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <h3> Hello, <%= current_user.first_name %></h3>
+        </li>
+      </ul>
     <% end %>
   <% end %>
 
   <button class="navbar-toggler" type="button" data-bs="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
@@ -27,6 +32,21 @@
             <li><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
             <li><%= link_to "Sites", sites_path, class: "dropdown-item" %></li>
             <li><%= link_to "Notifications", notifications_path, class: "dropdown-item" %></li>
+          </ul>
+        </li>
+      <% elsif user_signed_in? %>
+        <ul class="navbar-nav me-auto align-items-center">
+          <li class="nav-item">
+            <%= link_to 'Notifications', notifications_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "Sites", sites_path, class: "nav-link" %>
+          </li>
+        </ul>
+        <li class="nav-item dropdown">
+          <%= image_tag "zach.svg", class: "avatar-bordered-alert dropdown-toggle", role: "button",data: { "bs-toggle": "dropdown" }, 'aria-expanded': false %>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %></li>
           </ul>
         </li>
       <% else %>
