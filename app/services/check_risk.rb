@@ -11,7 +11,7 @@ class CheckRisk < ApplicationService
 
   def call
     api_key = ENV['APIVOID_KEY']
-    request = "https://endpoint.apivoid.com/urlrep/v1/pay-as-you-go/?key=#{api_key}&url=https://fastspecialists.info/oop/9989_md/10/221/3591/17/5316583"
+    request = "https://endpoint.apivoid.com/urlrep/v1/pay-as-you-go/?key=#{api_key}&url=#{@url}"
     risk_results_serialized = URI.parse(request).open.read
     get_risk_score(JSON.parse(risk_results_serialized))
   end
@@ -19,10 +19,18 @@ class CheckRisk < ApplicationService
   private
 
   def get_risk_score(results)
-    {
-      detections: results["data"]["report"]["domain_blacklist"]["detections"],
-      risk_score: results["data"]["report"]["risk_score"]["result"],
-      accessed_at: results["data"]["report"]["response_headers"]["date"]
-    }
+    if results["error"] == "Url is not valid"
+      {
+        detections: '',
+        risk_score: 0,
+        accessed_at: ''
+      }
+    else
+      {
+        detections: results["data"]["report"]["domain_blacklist"]["detections"],
+        risk_score: results["data"]["report"]["risk_score"]["result"],
+        accessed_at: results["data"]["report"]["response_headers"]["date"]
+      }
+    end
   end
 end

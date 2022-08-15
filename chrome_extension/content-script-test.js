@@ -4,7 +4,7 @@ const isoDateString = new Date().toISOString();
 const myHeaders = new Headers({
   'Content-Type': 'application/json',
   'X-User-Token': 'haxsNhyKNcHwiPgVohVD',
-  'X-User-Email': "c-QqLsd_tpxpZU3CiRPk"
+  'X-User-Email': "fake@fake.me"
 });
 
 const urlCheck = {
@@ -17,7 +17,7 @@ const urlCheck = {
 // create an object to store the risk score
 let risk_score = 0;
 
-const riskRequest = new Request('http://www.notsofast.co/api/v1/sites/risk-check', {
+const riskRequest = new Request('http://localhost:3000/api/v1/sites/risk-check', {
   method: 'POST',
   headers: myHeaders,
   body: JSON.stringify(urlCheck)
@@ -54,7 +54,7 @@ fetch(riskRequest)
 
 
 function createNotification(notifications) {
-  const request = new Request('http://www.notsofast.co/api/v1/notifications', {
+  const request = new Request('http://localhost:3000/api/v1/notifications', {
     method: 'POST',
     headers: myHeaders,
     body: JSON.stringify(notifications)
