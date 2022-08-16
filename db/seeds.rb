@@ -96,11 +96,13 @@ request = "https://endpoint.apivoid.com/urlrep/v1/pay-as-you-go/?key=#{api_key}&
 risk_results_serialized = URI.parse(request).open.read
 results = JSON.parse(risk_results_serialized)
 
-10.times do
+p results
+500.times do
   chosen_user = [satoka, jennifer, zach, antonio].sample
   notification = Notification.new(
     user_id: chosen_user.id,
-    accessed_at: results["data"]["report"]["response_headers"]["date"],
+    accessed_at: Faker::Date.between(from: '2022-08-04', to: '2022-09-03'),
+    # results.dig("data", "report", "response_headers", "date") ||
     description: Faker::Lorem.paragraph,
     read: Faker::Boolean.boolean,
     created_at: Faker::Date.between(from: '2022-08-04', to: '2022-09-03'),
@@ -109,8 +111,8 @@ results = JSON.parse(risk_results_serialized)
   notification.save!
 
   site = Site.new(
-    blocked: Faker::Boolean.boolean,
-    trust_with_popup: Faker::Boolean.boolean,
+    blocked: false,
+    trust_with_popup: false,
     user_id: chosen_user.id,
     notification: notification,
     reason: Faker::Lorem.sentence,

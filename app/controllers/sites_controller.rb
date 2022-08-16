@@ -2,7 +2,17 @@ class SitesController < ApplicationController
   before_action :set_site, only: %i[update]
 
   def index
-    @sites = policy_scope(Site)
+    if params[:query].present?
+      @sites = @sites.where('title ILIKE ?', "%#{params[:query]}%")
+    end
+
+    respond_to do |format|
+      format.html # Follow regular flow of Rails
+      format.text { render partial: '_search.html.erb', locals: { sites: @sites } }
+    end
+
+    @sites = policy_scope(Site).page(params[:page] || 1).per(10)
+
     @blocked_sites = @sites.where(blocked: true, trust_with_popup: false)
     @trusted_sites = @sites.where(blocked: false, trust_with_popup: true)
     @review_sites = @sites.where(blocked: false, trust_with_popup: false)

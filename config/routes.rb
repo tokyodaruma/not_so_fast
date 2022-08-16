@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :sites
   resources :notifications, only: %i[index show] do
     resources :sites
+
+  get '/page/:page', action: :index, on: :collection
   end
 
   namespace :api, defaults: { format: :json } do

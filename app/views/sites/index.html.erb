@@ -1,4 +1,19 @@
 <%= render 'shared/navbar' %>
+
+<div data-controller="refresh-list">
+  <%= form_with url: sites_path, method: :get, html: { class: 'mb-5', data: { refresh_list_target: 'form' } } do |f| %>
+    <%= f.text_field :query,
+                     class: "form-control",
+                     placeholder: 'Search site',
+                     value: params[:query],
+                     data: {
+                      refresh_list_target: 'searchInput',
+                      action: "keyup->refresh-list#update"
+                    } %>
+  <% end %>
+  <%= render 'search', sites: @sites %>
+ </div>
+
 <ul class="nav tabs-underlined" id="myTab" role="tablist">
   <li class="nav-item" role="presentation">
     <span class="nav-link tab-underlined active" id="block-tab" data-bs-toggle="tab" data-bs-target="#block-tab-pane" role="tab" aria-controls="block-tab-pane" aria-selected="true">Block</span>
@@ -33,10 +48,10 @@
               </button>
             </td>
           </tr>
-        </tbody>
-        <!-- Blocked Modal -->
-        <%= render 'modal', site: site %>
-      <% end %>
+         <!-- Blocked Modal -->
+          <%= render 'modal', site: site %>
+        <% end %>
+      </tbody>
     </table>
   </div>
   <!-- Trusted sites -->
@@ -60,15 +75,43 @@
               </button>
             </td>
           </tr>
-        </tbody>
-        <!-- Trusted Modal -->
-        <%= render 'modal', site: site %>
+          <!-- Trusted Modal -->
+          <%= render 'modal', site: site %>
         <% end %>
-      </table>
-    </div>
+      </tbody>
+    </table>
   </div>
-<!-- After table -->
-  <div class="list-new-entry">
+  <div class="tab-pane fade py-3" id="review-tab-pane" role="tabpanel" aria-labelledby="review-tab" tabindex="1">
+    <table class="styled-table">
+      <% if @review_sites.empty? %>
+        <h1 class="nothing-to-display">No review sites yet.</h1>
+      <% else %>
+        <%= render 'table_header' %>
+      <% end %>
+      <tbody>
+        <% @review_sites.each_with_index do |site, index| %>
+          <tr>
+            <th scope="row"><%= index + 1 %></th>
+            <td><%= site.referral_site %> </td>
+            <td><%= site.reason %> </td>
+            <td><%= site.url %> </td>
+            <td>
+              <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#site-<%= site.id %>">
+                <i class="fas fa-edit"></i>
+              </button>
+            </td>
+          </tr>
+          <!-- Review Modal -->
+          <%= render 'modal', site: site %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!-- Pagination -->
+<%= paginate @sites, theme: 'bootstrap-5' %>
+<!-- New site -->
+  <%# <div class="list-new-entry">
     <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#new">
       <i class="fas fa-edit"></i>
     </button>
