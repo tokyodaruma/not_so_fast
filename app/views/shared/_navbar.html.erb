@@ -18,7 +18,7 @@
     <ul class="navbar-nav mr-auto">
       <% if user_signed_in? && !current_user.care_receiver.nil? %>
         <li class="nav-item dropdown">
-          <% if @notifications.empty? %>
+          <% if @notifications.nil? || @notifications.empty? %>
             <%= image_tag "grandma.jpg", class: "avatar-bordered-safe dropdown-toggle", role: "button",data: { "bs-toggle": "dropdown" }, 'aria-expanded': false %>
           <% else %>
             <%= image_tag "grandma.jpg", class: "avatar-bordered-alert dropdown-toggle", role: "button",data: { "bs-toggle": "dropdown" }, 'aria-expanded': false %>
