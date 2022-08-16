@@ -1,0 +1,5 @@
+<div class="profile-card-banner"></div>
+  <%= image_tag "grandma.jpg", class: "avatar-bordered-safe dropdown-toggle", role: "button",data: { "bs-toggle": "dropdown" }, 'aria-expanded': false %>
+<div class="care-receiver-info">
+  <h2><%= current_user.care_receiver.relationship %> <%= current_user.care_receiver.last_name %></h2>
+</div>

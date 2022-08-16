@@ -1,28 +1,42 @@
 <%= render 'shared/navbar' %>
-<div class="cards">
-  <% if @notifications.any? %>
-    <% @notifications.each do |notification| %>
-    <div type="button" data-bs-toggle="modal" data-bs-target="#notification-<%= notification.id %>">
-      <div class="card-notification">
-        <div class="card-notification-infos justify-content-center">
-          <p><%= notification.description %></p>
-        </div>
-        <div class="card-notification-site">
-          <div class="card-notification-site-url">
-            <h2>URL:</h2>
-            <p><%= notification.site.url  %></p>
+<div class="container">
+  <div class="cards">
+    <% if @notifications.any? %>
+      <% @notifications.each do |notification| %>
+      <div type="button" data-bs-toggle="modal" data-bs-target="#notification-<%= notification.id %>">
+        <div class="card-notification">
+          <div class="card-notification-infos justify-content-center">
+            <p><%= notification.description %></p>
           </div>
-          <div class="card-notification-site-accessdate">
-            <h2> Accessed at:</h2>
-            <p><%= notification.accessed_at.strftime("%F %H:%M")  %></p>
+          <div class="card-notification-site">
+            <div class="card-notification-site-url">
+              <h2>URL:</h2>
+              <p><%= notification.site.url  %></p>
+            </div>
+            <div class="card-notification-site-accessdate">
+              <h2> Accessed at:</h2>
+              <p><%= notification.accessed_at.strftime("%F %H:%M")  %></p>
+            </div>
           </div>
         </div>
+      <!-- Modal -->
+      <%= render 'modal', notification: notification %>
       </div>
-    <!-- Modal -->
-    <%= render 'modal', notification: notification %>
-    </div>
+      <% end %>
+    <% else %>
+      <h2>No notifications yet.</h2>
     <% end %>
-  <% else %>
-    <h2>No notifications yet.</h2>
-  <% end %>
+  </div>
+  <div class="right-side">
+    <div class="profile-card">
+     <% if current_user.care_receiver.nil? %>
+      <%= render 'current_user_profile' %>
+     <% else %>
+      <%= render 'care_receiver_profile' %>
+     <% end %>
+    </div>
+    <div class="analytics">
+      <h2>Analytics</h2>
+    </div>
+  </div>
 </div>
