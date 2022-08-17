@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_13_032246) do
+ActiveRecord::Schema.define(version: 2022_08_17_111518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -65,8 +65,6 @@ ActiveRecord::Schema.define(version: 2022_08_13_032246) do
   end
 
   create_table "sites", force: :cascade do |t|
-    t.boolean "blocked", default: false
-    t.boolean "trust_with_popup", default: false
     t.bigint "user_id", null: false
     t.bigint "notification_id", null: false
     t.text "reason"
@@ -76,6 +74,7 @@ ActiveRecord::Schema.define(version: 2022_08_13_032246) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "detections"
     t.integer "risk_score"
+    t.integer "status"
     t.index ["notification_id"], name: "index_sites_on_notification_id"
     t.index ["user_id"], name: "index_sites_on_user_id"
   end

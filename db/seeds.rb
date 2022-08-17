@@ -98,28 +98,25 @@ results = JSON.parse(risk_results_serialized)
 
 10.times do
   chosen_user = [satoka, jennifer, zach, antonio].sample
-  notification = Notification.new(
+  notification = Notification.create!(
     user_id: chosen_user.id,
-    accessed_at: results["data"]["report"]["response_headers"]["date"],
+    accessed_at: Faker::Date.between(from: '2022-08-04', to: '2022-09-02'),
     description: Faker::Lorem.paragraph,
     read: Faker::Boolean.boolean,
     created_at: Faker::Date.between(from: '2022-08-04', to: '2022-09-03'),
     updated_at: Faker::Date.between(from: '2022-08-04', to: '2022-09-03')
   )
-  notification.save!
 
-  site = Site.new(
-    blocked: Faker::Boolean.boolean,
-    trust_with_popup: Faker::Boolean.boolean,
+  site = Site.create!(
+    status: :pending,
     user_id: chosen_user.id,
     notification: notification,
     reason: Faker::Lorem.sentence,
     url: Faker::Internet.url,
     referral_site: Faker::Internet.url,
-    detections: results["data"]["report"]["domain_blacklist"]["detections"],
-    risk_score: results["data"]["report"]["risk_score"]["result"]
+    detections: rand(1..10),
+    risk_score: rand(1..100)
   )
-  site.save!
 
   puts "Notification ##{notification.id} and Site ##{site.id} made."
 end
