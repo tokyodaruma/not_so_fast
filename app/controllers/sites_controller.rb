@@ -3,9 +3,9 @@ class SitesController < ApplicationController
 
   def index
     @sites = policy_scope(Site)
-    @blocked_sites = @sites.where(blocked: true, trust_with_popup: false)
-    @trusted_sites = @sites.where(blocked: false, trust_with_popup: true)
-    @review_sites = @sites.where(blocked: false, trust_with_popup: false)
+    @blocked_sites = @sites.where(status: :blocked)
+    @trusted_sites = @sites.where(status: :trusted)
+    @pending_sites = @sites.where(status: :pending)
     @new_site = Site.new
     @notifications = policy_scope(Notification).order(accessed_at: :desc)
   end
@@ -60,6 +60,6 @@ class SitesController < ApplicationController
   end
 
   def site_params
-    params.require(:site).permit(:blocked, :trust_with_popup, :reason, :url)
+    params.require(:site).permit(:status, :reason, :url)
   end
 end

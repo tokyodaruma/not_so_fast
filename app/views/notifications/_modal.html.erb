@@ -14,11 +14,11 @@
       </div>
       <div class="modal-footer">
         <%= simple_form_for(notification.site, remote: true) do |f| %>
-          <%= f.input :blocked, as: :hidden, input_html: { value: 'true'} %>
+          <%= f.input :status, as: :hidden, input_html: { value: 'blocked'} %>
           <%= f.submit 'BLOCK', class: 'btn btn-danger' %>
         <% end %>
         <%= simple_form_for(notification.site, remote: true) do |f| %>
-          <%= f.input :trust_with_popup, as: :hidden, input_html: { value: 'true'} %>
+          <%= f.input :status, as: :hidden, input_html: { value: 'trusted'} %>
           <%= f.submit 'TRUST', class: 'btn btn-success' %>
         <% end %>
       </div>

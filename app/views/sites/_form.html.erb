@@ -7,8 +7,7 @@
     <%= f.input :referral_site, as: :text %>
     <%= f.input :reason, as: :text %>
     <%= f.input :url, as: :text %>
-    <%= f.input :blocked, label: "Block?", as: :radio_buttons %>
-    <%= f.input :trust_with_popup, label: "Trust?", as: :radio_buttons %>
+    <%= f.input :status, label: "Update?", collection: ["blocked", "trusted"] %>
   </div>
 
   <div class="form-actions">
