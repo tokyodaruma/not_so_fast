@@ -1,6 +1,6 @@
-// .container {
-//   display: flex
-// }
+.notifications-container {
+  display: flex
+}
 
 body {
   background-color: $not-so-fast-bg;
@@ -13,4 +13,5 @@ h1 {
 p {
   font-size: 16px;
   opacity: 50%;
+  word-break: break-all;
 }

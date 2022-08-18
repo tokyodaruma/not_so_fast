@@ -7,6 +7,5 @@ class User < ApplicationRecord
   has_one_attached :photo
   has_one :care_receiver
   has_many :sites
-  
   acts_as_token_authenticatable
 end
