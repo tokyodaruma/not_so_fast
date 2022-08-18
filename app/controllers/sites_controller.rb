@@ -44,7 +44,6 @@ class SitesController < ApplicationController
 
   # PATCH/PUT /sites/1
   def update
-
     if @site.update(site_params)
       redirect_to sites_path, notice: 'Site was successfully updated.'
     else
