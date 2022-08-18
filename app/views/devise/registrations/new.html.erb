@@ -28,6 +28,11 @@
                         label: false,
                         placeholder: "Your email",
                         input_html: { autocomplete: "email" }%>
+            <%= f.input :phone_number,
+                        required: true,
+                        label: false,
+                        placeholder: "Your phone number",
+                        input_html: { autocomplete: "phone number" } %>
             <%= f.input :password,
                         required: true,
                         label: false,
