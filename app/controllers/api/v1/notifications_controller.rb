@@ -40,7 +40,7 @@ class Api::V1::NotificationsController < Api::V1::BaseController
   def set_params
     @notification_params, @site_params = params.require(%i[notification site])
     @notification_params = @notification_params.permit(:accessed_at, :description, :read)
-    @site_params = @site_params.permit(:url, :reason, :referral_site, :notification_id, :detections, :risk_score)
+    @site_params = @site_params.permit(:url, :reason, :referral_site, :notification_id, :detections, :risk_score, :status)
   end
 
   def render_error

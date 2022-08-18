@@ -3,7 +3,7 @@ const isoDateString = new Date().toISOString();
 
 const myHeaders = new Headers({
   'Content-Type': 'application/json',
-  'X-User-Token': 'haxsNhyKNcHwiPgVohVD',
+  'X-User-Token': '184yjGZ2NoJ4LeqnLMfD',
   'X-User-Email': "fake@fake.me"
 });
 
@@ -41,7 +41,8 @@ fetch(riskRequest)
         "reason": `A ${data.risk_score} risk score was given for this URL`,
         "referral_site": targetUrl,
         "detections": data.detections,
-        "risk_score": data.risk_score
+        "risk_score": data.risk_score,
+        "status": "pending"
       }
     }
     if (data.risk_score > 1) {
