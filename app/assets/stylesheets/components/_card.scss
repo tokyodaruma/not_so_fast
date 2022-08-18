@@ -20,6 +20,12 @@
   flex-direction: column;
   border-radius: 10px;
   width: 100%;
+  overflow: hidden;
+}
+
+.card-notification:hover .card-notification-infos{
+  transform: translateY(0%);
+  opacity:1;
 }
 
 .card-notification h2 {
@@ -49,9 +55,17 @@
 
 .card-notification .card-notification-infos {
   background-color: #FE938C;
+  transition: 0.5s;
+  transform: translateY(0%);
+  opacity: 0;
   p {
     margin-top: 10px;
   }
+}
+
+.card-notification .card-notification-infos.show {
+  top: 100%;
+  bottom: 0;
 }
 
 .card-notification .card-notification-site {
