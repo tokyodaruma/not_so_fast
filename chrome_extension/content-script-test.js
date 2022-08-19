@@ -1,4 +1,5 @@
-let targetUrl = window.location.href;
+let targetUrl = window.location.host;
+let checkUrl = window.location.href;
 const isoDateString = new Date().toISOString();
 
 const myHeaders = new Headers({
@@ -7,41 +8,54 @@ const myHeaders = new Headers({
   'X-User-Email': "fake@fake.me"
 });
 
+if (isSiteBlocked()) {
+  // block
+  console.log("block this site");
+} else {
+  console.log("create a notification");
+  checkRiskScore();
+};
+
 // create an object to check if a site is blocked
+function isSiteBlocked() {
+  let siteIsBlocked = false;
 
-const checkIfSiteIsBlocked = new Request('http://localhost:3000/api/v1/sites', {
-  method: 'GET',
-  headers: myHeaders
- });
+  const checkIfSiteIsBlocked = new Request('http://localhost:3000/api/v1/sites', {
+    method: 'GET',
+    headers: myHeaders
+   });
 
-fetch(checkIfSiteIsBlocked)
-  .then(checkStatus)
-  .then(response => response.json())
-  .then(data => {
-    // for loop
-    // check if url is already blocked (will need targetUrl)
-  })
-  .catch((error) => {
-    console.log('There was an error', error);
-  });
+  fetch(checkIfSiteIsBlocked)
+    .then(checkStatus)
+    .then(response => response.json())
+    .then(sites => {
+      for (let count in sites) {
+        if (sites[count].status="blocked" && sites[count].url == targetUrl) {
+          console.log(true);
+          siteIsBlocked = true;
+        }
+      }
+      return result;
+    })
+    .catch((error) => {
+      console.log('There was an error', error);
+    });
+}
 
 // create an object to store the risk score
 function checkRiskScore() {
   const urlCheck = {
     "site":
     {
-      "url": targetUrl
+      "url": checkUrl
     }
   }
-
-  let risk_score = 0;
 
   const riskRequest = new Request('http://localhost:3000/api/v1/sites/risk-check', {
     method: 'POST',
     headers: myHeaders,
     body: JSON.stringify(urlCheck)
   });
-
 
   fetch(riskRequest)
     .then(checkStatus)
@@ -74,6 +88,7 @@ function checkRiskScore() {
   });
 }
 
+// create a notification + site item
 function createNotification(notifications) {
   const request = new Request('http://localhost:3000/api/v1/notifications', {
     method: 'POST',

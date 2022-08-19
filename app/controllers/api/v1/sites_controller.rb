@@ -1,5 +1,5 @@
 class Api::V1::SitesController < Api::V1::BaseController
-  acts_as_token_authentication_handler_for User, except: %i[index call]
+  acts_as_token_authentication_handler_for User, except: %i[call]
   before_action :set_site, only: %i[update]
 
   def index
