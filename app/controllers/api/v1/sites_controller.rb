@@ -32,7 +32,7 @@ class Api::V1::SitesController < Api::V1::BaseController
   end
 
   def site_params
-    params.require(:site).permit(:url, :reason, :referral_site, :notification_id)
+    params.require(:site).permit(:url, :reason, :referral_site, :notification_id, :status)
   end
 
   def render_error
