@@ -3,9 +3,11 @@ Rails.application.routes.draw do
   root to: 'pages#home'
 
   resources :sites
-  resources :notifications, only: %i[index show] do
+  resources :notifications, only: %i[index show create] do
     resources :sites
   end
+
+  resources :care_receivers, only: %i[create]
 
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
