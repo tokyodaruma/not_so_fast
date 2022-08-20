@@ -8,41 +8,57 @@ const myHeaders = new Headers({
   'X-User-Email': "fake@fake.me"
 });
 
-if (isSiteBlocked()) {
-  // block
-  console.log("block this site");
-} else {
-  console.log("create a notification");
-  checkRiskScore();
-};
-
-console.log(isSiteBlocked());
-
 // create an object to check if a site is blocked
-function isSiteBlocked() {
-  let siteIsBlocked = false;
+const checkIfSiteIsBlocked = new Request('http://localhost:3000/api/v1/sites', {
+  method: 'GET',
+  headers: myHeaders
+  });
 
-  const checkIfSiteIsBlocked = new Request('http://localhost:3000/api/v1/sites', {
-    method: 'GET',
-    headers: myHeaders
-   });
-
-  fetch(checkIfSiteIsBlocked)
-    .then(checkStatus)
-    .then(response => response.json())
-    .then(sites => {
+const siteIsBlocked = fetch(checkIfSiteIsBlocked)
+  .then(checkStatus)
+  .then(response => response.json())
+  .then(sites => {
+    if (typeof sites !== "undefined") {
       for (let count in sites) {
-        if (sites[count].status="blocked" && sites[count].url == targetUrl) {
-          // need to figure out how to update this function with true if site is blocked
-          siteIsBlocked = true;
+        if (sites[count].status=="blocked" && sites[count].url == targetUrl) {
+          console.log("blocked");
+          return "blocked";
+        } else if (sites[count].status=="trusted" && sites[count].url == targetUrl) {
+          console.log("trusted");
+          return "trusted";
+        } else if (sites[count].status=="pending" && sites[count].url == targetUrl) {
+          console.log("pending");
+          return "pending";
+        } else {
+          console.log(sites)
+          console.log("create notification");
+          return "create notification";
         }
       }
-    })
-    .catch((error) => {
-      console.log('There was an error', error);
-    });
-  return siteIsBlocked;
-}
+    }
+    else {
+      console.log('this hit');
+      return "create notification"
+    }
+  })
+  .catch((error) => {
+    console.log('There was an error', error);
+  });
+
+siteIsBlocked
+  .then((result) => {
+    if (result=="blocked") {
+      document.documentElement.innerHTML = '';
+      document.documentElement.innerHTML = 'Domain is blocked';
+      document.documentElement.scrollTop = 0;
+    } else if (result=="trusted" || result=="pending") {
+      console.log("do nothing");
+    } else {
+      console.log(result);
+      checkRiskScore();
+    }
+  })
+  .catch(err=>console.log(err))
 
 // create an object to store the risk score
 function checkRiskScore() {
