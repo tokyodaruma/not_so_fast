@@ -13,11 +13,15 @@
         <p>Which action would you like to take on this site?</p>
       </div>
       <div class="modal-footer">
-        <%= simple_form_for(notification.site, remote: true) do |f| %>
-          <%= f.input :status, as: :hidden, input_html: { value: 'blocked'} %>
-          <%= f.submit 'BLOCK', class: 'btn btn-danger' %>
+        <%= simple_form_for(notification, remote: true) do |notification_builder| %>
+          <%= notification_builder.input :read, as: :hidden, input_html: { value: :true} %>
+          <%= notification_builder.simple_fields_for(notification.site, remote: true) do |site_builder| %>
+            <%= site_builder.input :status, as: :hidden, input_html: { value: 'blocked'} %>
+          <% end %>
+          <%= notification_builder.submit 'BLOCK', class: 'btn btn-danger' %>
         <% end %>
-        <%= simple_form_for(notification.site, remote: true) do |f| %>
+        <%= simple_form_for([notification, notification.site], remote: true) do |f| %>
+          <%= f.input :read, as: :hidden, input_html: { value: 'true'} %>
           <%= f.input :status, as: :hidden, input_html: { value: 'trusted'} %>
           <%= f.submit 'TRUST', class: 'btn btn-success' %>
         <% end %>
