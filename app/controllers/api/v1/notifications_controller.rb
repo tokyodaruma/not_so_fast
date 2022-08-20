@@ -8,7 +8,7 @@ class Api::V1::NotificationsController < Api::V1::BaseController
   end
 
   def update
-    if @notification.update(notification_params)
+    if @notification.update(@notification_params)
       render :index
     else
       render_error
