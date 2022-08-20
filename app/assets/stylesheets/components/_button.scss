@@ -18,3 +18,11 @@
 .btn-ghost:hover {
   opacity: 1;
 }
+
+.scale-btn {
+  margin: 2em;
+}
+
+.scale-btn:hover {
+  transform: scale(2);
+}
