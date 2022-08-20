@@ -19,6 +19,10 @@
   opacity: 1;
 }
 
-.new-site btn btn-light {
-  background-color:  #4A4A4A;
+.scale-btn {
+  margin: 2em;
+}
+
+.scale-btn:hover {
+  transform: scale(2);
 }
