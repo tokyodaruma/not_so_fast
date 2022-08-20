@@ -14,7 +14,7 @@ const checkIfSiteIsBlocked = new Request('https://www.notsofast.co/api/v1/sites'
   headers: myHeaders
   });
 
-const siteIsBlocked = fetch(checkIfSiteIsBlocked)
+  const siteIsBlocked = fetch(checkIfSiteIsBlocked)
   .then(checkStatus)
   .then(response => response.json())
   .then(sites => {
@@ -26,15 +26,11 @@ const siteIsBlocked = fetch(checkIfSiteIsBlocked)
         } else if (sites[count].status=="trusted" && sites[count].url == targetUrl) {
           console.log("trusted");
           return "trusted";
-        } else if (sites[count].status=="pending" && sites[count].url == targetUrl) {
-          console.log("pending");
-          return "pending";
-        } else {
-          console.log(sites)
-          console.log("create notification");
-          return "create notification";
+        } else if (sites[count].status == "pending" && sites[count].url == targetUrl) {
+          return "pending"
         }
       }
+      return "create notification"
     }
     else {
       console.log('this hit');

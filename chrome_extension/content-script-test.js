@@ -26,15 +26,11 @@ const siteIsBlocked = fetch(checkIfSiteIsBlocked)
         } else if (sites[count].status=="trusted" && sites[count].url == targetUrl) {
           console.log("trusted");
           return "trusted";
-        } else if (sites[count].status=="pending" && sites[count].url == targetUrl) {
-          console.log("pending");
-          return "pending";
-        } else {
-          console.log(sites)
-          console.log("create notification");
-          return "create notification";
+        } else if (sites[count].status == "pending" && sites[count].url == targetUrl) {
+          return "pending"
         }
       }
+      return "create notification"
     }
     else {
       console.log('this hit');
