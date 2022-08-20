@@ -16,6 +16,8 @@ if (isSiteBlocked()) {
   checkRiskScore();
 };
 
+console.log(isSiteBlocked());
+
 // create an object to check if a site is blocked
 function isSiteBlocked() {
   let siteIsBlocked = false;
@@ -31,15 +33,15 @@ function isSiteBlocked() {
     .then(sites => {
       for (let count in sites) {
         if (sites[count].status="blocked" && sites[count].url == targetUrl) {
-          console.log(true);
+          // need to figure out how to update this function with true if site is blocked
           siteIsBlocked = true;
         }
       }
-      return result;
     })
     .catch((error) => {
       console.log('There was an error', error);
     });
+  return siteIsBlocked;
 }
 
 // create an object to store the risk score
