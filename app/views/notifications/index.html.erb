@@ -25,6 +25,13 @@
     <% else %>
       <h2>No notifications yet.</h2>
     <% end %>
+    <!--new site button-->
+    <div class="list-new-entry">
+      <button type="button" class="new-site scale-btn btn btn-light" data-bs-toggle="modal" data-bs-target="#new">
+        <i class="fas fa-plus-square"></i>
+      </button>
+    </div>
+    <%= render 'sites/new', site: @new_site %>
   </div>
   <div class="right-side">
     <div class="profile-card">
@@ -34,8 +41,6 @@
       <%= render 'care_receiver_profile' %>
      <% end %>
     </div>
-    <div class="analytics">
-      <h2>Analytics</h2>
-    </div>
   </div>
+
 </div>
