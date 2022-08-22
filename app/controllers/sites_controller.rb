@@ -45,9 +45,14 @@ class SitesController < ApplicationController
   # PATCH/PUT /sites/1
   def update
     @site = Site.find(params[:id])
-    @notification = Notification.find(params[:id])
-    if @site.update(@site_params)
+    # updating read status on notifications#index
+    if @site.update(@site_params) && params.include?("notification")
+      @notification = Notification.find(params[:id])
       @notification.update(@notification_params)
+      redirect_to sites_path, notice: 'Site was successfully updated.'
+    # updating site#index block/unblock
+    elsif @site.update(@site_params)
+      authorize @site
       redirect_to sites_path, notice: 'Site was successfully updated.'
     else
       render :edit
@@ -64,8 +69,11 @@ class SitesController < ApplicationController
   # end
 
   def set_params
-    @notification_params, @site_params = params.require(%i[notification site])
-    @notification_params = @notification_params.permit(:read)
-    @site_params = @site_params.permit(:url, :reason, :referral_site, :notification_id, :detections, :risk_score, :status)
+    if params.include?("site") && !params.include?("notification")
+      @site_params = params.require(:site).permit(:url, :reason, :referral_site, :notification_id, :detections, :risk_score, :status)
+    else
+      @notification_params, @site_params = params.require(%i[notification site])
+      @notification_params = @notification_params.permit(:read)
+    end
   end
 end
