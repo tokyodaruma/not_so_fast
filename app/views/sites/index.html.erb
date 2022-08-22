@@ -1,67 +1,75 @@
-<ul class="nav tabs-underlined" id="myTab" role="tablist">
-  <li class="nav-item" role="presentation">
-    <span class="nav-link tab-underlined active" id="block-tab" data-bs-toggle="tab" data-bs-target="#block-tab-pane" role="tab" aria-controls="block-tab-pane" aria-selected="true">Block</span>
-  </li>
-  <li class="nav-item" role="presentation">
-    <span class="nav-link tab-underlined" id="trust-tab" data-bs-toggle="tab" data-bs-target="#trust-tab-pane" role="tab" aria-controls="trust-tab-pane" aria-selected="false">Trust</span>
-  </li>
-  <li class="nav-item" role="presentation">
-    <span class="nav-link tab-underlined" id="pending-tab" data-bs-toggle="tab" data-bs-target="#pending-tab-pane" role="tab" aria-controls="pending-tab-pane" aria-selected="false">Pending Review</span>
-  </li>
-</ul>
-
-<!-- Blocked sites -->
-<div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade py-3 show active" id="block-tab-pane" role="tabpane<div class=l" aria-labelledby="block-tab" tabindex="0">
-    <table class="styled-table">
-      <% if @blocked_sites.empty? %>
-        <h2 class="nothing-to-display">No blocked sites yet.</h2>
-      <% else %>
-        <%= render 'table_header' %>
-      <% end %>
-      <tbody>
-        <% @blocked_sites.each_with_index do |site, index| %>
-          <tr>
-            <th scope="row"><%= index + 1 %></th>
-            <td><%= site.referral_site %> </td>
-            <td><%= site.reason %> </td>
-            <td><%= site.url %> </td>
-            <td>
-            <%= render "change_status", site: site, caption: "Unblock", status: "trusted" %>
-            </td>
-          </tr>
-        </tbody>
-        <!-- Blocked Modal -->
-        <%= render 'modal', site: site %>
-      <% end %>
-    </table>
-  </div>
-  <!-- Trusted sites -->
-  <div class="tab-pane fade py-3" id="trust-tab-pane" role="tabpanel" aria-labelledby="trust-tab" tabindex="1">
-    <table class="styled-table">
-      <% if @trusted_sites.empty? %>
-        <h2 class="nothing-to-display">No trusted sites yet.</h2>
-      <% else %>
-        <%= render 'table_header' %>
-      <% end %>
-      <tbody>
-        <% @trusted_sites.each_with_index do |site, index| %>
-          <tr>
-            <th scope="row"><%= index + 1 %></th>
-            <td><%= site.referral_site %> </td>
-            <td><%= site.reason %> </td>
-            <td><%= site.url %> </td>
-            <td>
-              <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#site-<%= site.id %>">
-                <i class="fas fa-edit"></i>
-              </button>
-            </td>
-          </tr>
-        </tbody>
-        <!-- Trusted Modal -->
-        <%= render 'modal', site: site %>
-        <% end %>
-      </table>
+<div class="table-container">
+  <div class="row">
+    <div class="col-md-6">
+      Analysis
+    </div>
+    <div class="col-md-6">
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button class="nav-link active" id="nav-block-tab" data-bs-toggle="tab" data-bs-target="#nav-block" type="button" role="tab" aria-controls="nav-block" aria-selected="true">Block</button>
+            <button class="nav-link" id="nav-trust-tab" data-bs-toggle="tab" data-bs-target="#nav-trust" type="button" role="tab" aria-controls="nav-trust" aria-selected="false">Trust</button>
+        </div>
+      </nav>
+    <!-- Blocked sites -->
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-block" role="tabpanel" aria-labelledby="nav-block-tab">
+        <table class="table table-success table-striped">
+          <% if @blocked_sites.empty? %>
+            <h2 class="nothing-to-display">No blocked sites yet.</h2>
+          <% else %>
+            <%= render 'table_header' %>
+          <% end %>
+          <tbody>
+            <% @blocked_sites.each_with_index do |site, index| %>
+              <tr>
+                <th scope="row"><%= index + 1 %></th>
+                <td><%= site.referral_site %></td>
+                <td><%= site.url %></td>
+                <td><%= site.reason %></td>
+                <td>
+                  <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#site-<%= site.id %>">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <%= render 'modal', site: site %>
+                </td>
+                <td><%= render "change_status", site: site, caption: "Unblock", status: "trusted" %>
+                </td>
+              </tr>
+            </tbody>
+            <% end %>
+          </table>
+        </div>
+      <!-- Trusted sites -->
+      <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade" id="nav-trust" role="tabpanel" aria-labelledby="nav-trust-tab">
+        <table class="table table-success table-striped">
+            <% if @trusted_sites.empty? %>
+              <h2 class="nothing-to-display">No trusted sites yet.</h2>
+            <% else %>
+              <%= render 'table_header' %>
+            <% end %>
+            <tbody>
+              <% @trusted_sites.each_with_index do |site, index| %>
+                <tr>
+                  <th scope="row"><%= index + 1 %></th>
+                  <td><%= site.referral_site %> </td>
+                  <td><%= site.url %> </td>
+                  <td><%= site.reason %></td>
+                  <td>
+                    <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#site-<%= site.id %>">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <%= render 'modal', site: site %>
+                  </td>
+                  <td><%= render "change_status", site: site, caption: "Block", status: "blocked" %>
+                  </td>
+                </tr>
+            </tbody>
+            <% end %>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
+</div>
 </div>
