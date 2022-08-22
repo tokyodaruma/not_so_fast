@@ -64,30 +64,4 @@
       </table>
     </div>
   </div>
-<!-- Pending sites -->
-<div class="tab-pane fade py-3" id="pending-tab-pane" role="tabpanel" aria-labelledby="pending-tab" tabindex="1">
-  <table class="styled-table">
-    <% if @pending_sites.empty? %>
-      <h2 class="nothing-to-display">No pending sites to display.</h2>
-    <% else %>
-      <%= render 'table_header' %>
-    <% end %>
-    <tbody>
-      <% @trusted_sites.each_with_index do |site, index| %>
-        <tr>
-          <th scope="row"><%= index + 1 %></th>
-          <td><%= site.referral_site %> </td>
-          <td><%= site.reason %> </td>
-          <td><%= site.url %> </td>
-          <td>
-            <button type="button" class="btn btn-ghost" data-bs-toggle="modal" data-bs-target="#site-<%= site.id %>">
-            Block</button>
-          </td>
-        </tr>
-      </tbody>
-      <!-- Pending Modal -->
-      <%= render 'modal', site: site %>
-      <% end %>
-    </table>
-  </div>
 </div>

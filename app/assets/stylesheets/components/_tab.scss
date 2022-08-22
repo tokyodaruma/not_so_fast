@@ -1,3 +1,46 @@
+.nav-tabs .nav-link.active {
+  color: #495057;
+  background-color: #d1f8e7;
+  border-color: #dee2e6 #dee2e6 #fff;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 10px 30px;
+  margin: 0;
+}
+
+.nav-tabs .nav-link {
+  color: #495057;
+  margin-bottom: 0;
+  background: 0 0;
+  padding: 10px 30px;
+  border: 1px solid transparent;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  margin: 0;
+}
+
+// Want to get rid of the bottom line
+.tr {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.nav-link {
+  .tab-underlined {
+    border: 1px solid black;
+    height: 200px;
+    border-radius: 20px;
+    width: 100px;
+    background-color: #63a18f;
+    text-align: center;
+  }
+  }
+
+  .nav-item {
+      display: block;
+      padding: 0.5rem 1rem;
+  }
+
 .tabs-underlined {
   display: flex;
   justify-content: center;
@@ -22,5 +65,13 @@
   .tab-underlined.active {
     opacity: 1;
     border-bottom: 3px solid #555555;
+  }
+
+.nav-tabs .nav-link {
+    margin-bottom: 0;
+    background: 0 0;
+    border: 1px solid transparent;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
   }
 }

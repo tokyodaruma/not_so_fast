@@ -3,11 +3,11 @@
   <%= image_tag "grandma.jpg", class: "avatar-bordered-alert dropdown-toggle", role: "button",data: { "bs-toggle": "dropdown" }, 'aria-expanded': false %>
 <% else %>
   <div class="profile-card-banner" style="background-color: #7BB562"></div>
-  <%= image_tag "grandma.jpg", class: "avatar-bordered-alert dropdown-toggle", role: "button",data: { "bs-toggle": "dropdown" }, 'aria-expanded': false %>
+  <%= image_tag "grandma.jpg", class: "avatar-bordered-safe dropdown-toggle", role: "button",data: { "bs-toggle": "dropdown" }, 'aria-expanded': false %>
 <% end %>
 <div class="care-receiver-info">
   <h2><%= current_user.care_receiver.relationship %> <%= current_user.care_receiver.last_name %></h2>
   <p>Phone: <%= current_user.phone_number %> </p>
   <p>Last active: August 19th, 2022</p>
-  <p><%= @notifications.count %> notifications reviewed in the last week.</p>
+  <p>22 notifications reviewed in the last week.</p>
 </div>
