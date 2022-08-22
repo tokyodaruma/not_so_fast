@@ -12,7 +12,7 @@
 
 <!-- Blocked sites -->
 <div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade py-3 show active" id="block-tab-pane" role="tabpanel" aria-labelledby="block-tab" tabindex="0">
+  <div class="tab-pane fade py-3 show active" id="block-tab-pane" role="tabpane<div class=l" aria-labelledby="block-tab" tabindex="0">
     <table class="styled-table">
       <% if @blocked_sites.empty? %>
         <h2 class="nothing-to-display">No blocked sites yet.</h2>
@@ -91,10 +91,3 @@
     </table>
   </div>
 </div>
-<!-- After table -->
-  <%# <div class="list-new-entry">
-    <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#new">
-      <i class="fas fa-edit"></i>
-    </button>
-  </div>
-  <%= render 'new', site: @new_site %>
