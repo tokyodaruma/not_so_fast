@@ -1,4 +1,4 @@
-<div class="container">
+<div class="table-container">
   <div class="row">
     <div class="col-md-6">
       Analysis
@@ -24,8 +24,12 @@
               <tr>
                 <th scope="row"><%= index + 1 %></th>
                 <td><%= site.referral_site %></td>
-                <td><%= site.reason %></td>
                 <td><%= site.url %></td>
+                <td><%= site.reason %></td>
+                <td> <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#edit">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                <%= render 'modal', site: site %></td>
                  <%# <textarea>Take a note</textarea>
                     <div id="create">+</div> %>
                 <td><%= render "change_status", site: site, caption: "Unblock", status: "trusted" %>
@@ -49,8 +53,8 @@
                 <tr>
                   <th scope="row"><%= index + 1 %></th>
                   <td><%= site.referral_site %> </td>
-                  <td><%= site.reason %> </td>
                   <td><%= site.url %> </td>
+                  <td>Add a comment</td>
                   <td>
                     <%= render "change_status", site: site, caption: "Block", status: "blocked" %>
                   </td>
@@ -63,11 +67,4 @@
     </div>
   </div>
 </div>
-
-<!-- After table -->
-  <%# <div class="list-new-entry">
-    <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#new">
-      <i class="fas fa-edit"></i>
-    </button>
-  </div>
-  <%= render 'new', site: @new_site %>
+</div>
