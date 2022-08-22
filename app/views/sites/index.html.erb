@@ -26,12 +26,12 @@
                 <td><%= site.referral_site %></td>
                 <td><%= site.url %></td>
                 <td><%= site.reason %></td>
-                <td> <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#edit">
-                      <i class="fas fa-edit"></i>
-                    </button>
-                <%= render 'modal', site: site %></td>
-                 <%# <textarea>Take a note</textarea>
-                    <div id="create">+</div> %>
+                <td>
+                  <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#site-<%= site.id %>">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <%= render 'modal', site: site %>
+                </td>
                 <td><%= render "change_status", site: site, caption: "Unblock", status: "trusted" %>
                 </td>
               </tr>
@@ -54,9 +54,14 @@
                   <th scope="row"><%= index + 1 %></th>
                   <td><%= site.referral_site %> </td>
                   <td><%= site.url %> </td>
-                  <td>Add a comment</td>
+                  <td><%= site.reason %></td>
                   <td>
-                    <%= render "change_status", site: site, caption: "Block", status: "blocked" %>
+                    <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#site-<%= site.id %>">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <%= render 'modal', site: site %>
+                  </td>
+                  <td><%= render "change_status", site: site, caption: "Block", status: "blocked" %>
                   </td>
                 </tr>
             </tbody>

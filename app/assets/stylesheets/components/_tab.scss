@@ -46,27 +46,6 @@
   justify-content: center;
 }
 
-.tabs-underlined {
-  .tab-underlined {
-    color: black;
-    padding: 8px;
-    margin: 8px 16px;
-    opacity: .4;
-    cursor: pointer;
-    text-decoration: none;
-    border-bottom: 4px solid transparent;
-    display: block;
-  }
-
-  .tab-underlined:hover {
-    opacity: 0.5;
-  }
-
-  .tab-underlined.active {
-    opacity: 1;
-    border-bottom: 3px solid #555555;
-  }
-
 .nav-tabs .nav-link {
     margin-bottom: 0;
     background: 0 0;
@@ -74,4 +53,4 @@
     border-top-left-radius: 0.25rem;
     border-top-right-radius: 0.25rem;
   }
-}
+
