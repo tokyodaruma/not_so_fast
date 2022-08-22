@@ -1,0 +1,106 @@
+.notification-cards {
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 0 15px rgba(9, 9, 9, 0.2);
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  width: 100%;
+  margin-right: 8px;
+  grid-row: auto
+}
+
+.notification-card {
+  justify-content: center;
+}
+
+.notification-card:hover .notification-card-infos{
+  transform: translateY(0%);
+  opacity:1;
+}
+
+.notification-card h2 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.notification-card .card-notification-infos {
+  background-color: #FE938C;
+  transition: 0.5s;
+  transform: translateY(0%);
+  opacity: 0;
+  p {
+    margin-top: 10px;
+  }
+}
+
+.notification-card .card-notification-infos.show {
+  top: 100%;
+  bottom: 0;
+}
+
+.notification-card .card-notification-site {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.notification-card .card-notification-infos-status {
+  padding: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.notification-card .card-notification-site-accessdate {
+
+}
+
+
+
+// // Smallest device
+// @media (min-width: 100px) and (max-width: 575px) {
+//   .cards {
+//     width: 100%;
+//   }
+// }
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) {
+  .cards {
+    width: 600px;
+  }
+  .card-notification-infos {
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) {
+  .cards {
+    width: 800px;
+  }
+  .card-notification-infos {
+  }
+}
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) {
+  .cards {
+  }
+  .card-notification-infos {
+    justify-content: space-between;
+  }
+}
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) {
+  .cards {
+  }
+  .card-notification-infos {
+  }
+}
