@@ -1,0 +1,13 @@
+body{
+  background-color:#BED8D4;
+  width: 200px;
+  height: 150px;
+  font-size: 14px;
+  font-family: Helvetica;
+  text-align: center;
+}
+
+.button {
+  background-color: #2081C3;
+  color: white
+}
