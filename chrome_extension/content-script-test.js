@@ -41,11 +41,30 @@ const siteIsBlocked = fetch(checkIfSiteIsBlocked)
     console.log('There was an error', error);
   });
 
+const blocked_site = `
+<body style="background-color: #BED8D4;">
+  <div class="blocked"
+    style="display: flex;
+    justify-content: center;
+    border-radius: 8px;
+    background-color: white;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 120px;
+    height: 500px;
+    width: 500px;">
+    <div class="header">
+      <h1>Domain is blocked</h1>
+    </div>
+  </div>
+</body>
+`;
+
 siteIsBlocked
   .then((result) => {
     if (result=="blocked") {
       document.documentElement.innerHTML = '';
-      document.documentElement.innerHTML = 'Domain is blocked';
+      document.documentElement.innerHTML = blocked_site;
       document.documentElement.scrollTop = 0;
     } else if (result=="trusted" || result=="pending") {
       console.log("do nothing");
