@@ -4,6 +4,6 @@ const button = document.querySelector('#clickMe');
 button.addEventListener('click', () => {
 
     // open a new tab
-    const tab = window.open('https://not-so-fast.herokuapp.com/', '_blank');
+    const tab = window.open('https://not-so-fast.herokuapp.com/users/sign_in', '_blank');
 
 });
