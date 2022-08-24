@@ -1,9 +1,31 @@
-<div class="table-container">
-  <div class="row">
-    <div class="col-md-6">
-      Analysis
-    </div>
-    <div class="col-md-6">
+<div class="sites-container">
+  <h1>Sites</h1>
+      <div class="row">
+        <div class="col-6">
+          <div class="analytics-card">
+            <div class="analytics-card-space">
+              <h2> Domain name </h2>
+                <!-- domain pie chart -->
+                <%#= tld = site.url.match(\.[^.]{2,3}(?:\.[^.]{2,3})?$) %>
+                  <%= pie_chart Site.group(:url).count %>
+                  <%#= pie_chart Site.group(tld).count %>
+                <!-- domain recent bar chart -->
+            </div>
+            <div class="analytics-card-space">
+              <h2>Domain recency</h2>
+                <%=  pie_chart Site.group(:is_domain_recent).count %>
+                <%#= bar_chart Shirt.group(:size).sum(:price) %>
+            </div>
+            <div class="analytics-card-space">
+              <!-- webpage title Keyword -->
+              <h2> Keyword - Risk Score relation </h2>
+                <%= bar_chart Site.group(:webpage_title).sum(:risk_score) %>
+                <%#= column_chart Site.group_by_year(:created_at, format: "%a").count %>
+            </div>
+          </div>
+        </div>
+
+    <div class="col-6">
       <nav>
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <button class="nav-link active" id="nav-block-tab" data-bs-toggle="tab" data-bs-target="#nav-block" type="button" role="tab" aria-controls="nav-block" aria-selected="true">Block</button>
@@ -24,7 +46,7 @@
               <tr>
                 <th scope="row"><%= index + 1 %></th>
                 <td><%= site.risk_score %></td>
-                <td><%= URI.parse(site.url).host %></td>
+                <td><%= site.referral_site %></td>
                 <td><%= site.reason %></td>
                 <td>
                   <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#site-<%= site.id %>">
@@ -53,7 +75,7 @@
                 <tr>
                   <th scope="row"><%= index + 1 %></th>
                   <td><%= site.risk_score %> </td>
-                  <td><%= site.url %> </td>
+                  <td><%= site.referral_site %></td>
                   <td><%= site.reason %></td>
                   <td>
                     <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#site-<%= site.id %>">
