@@ -19,7 +19,7 @@
             <div class="analytics-card-space">
               <!-- webpage title Keyword -->
               <h2> Keyword - Risk Score relation </h2>
-                <%= bar_chart Site.group(:webpage_title).sum(:risk_score) %>
+                <%= bar_chart Site.group(:webpage_title).sum(:risk_score), xtitle: "Risk score", ytitle: "Keyword" %>
                 <%#= column_chart Site.group_by_year(:created_at, format: "%a").count %>
             </div>
           </div>
@@ -35,16 +35,15 @@
     <!-- Blocked sites -->
     <div class="tab-content" id="nav-tabContent">
       <div class="tab-pane fade show active" id="nav-block" role="tabpanel" aria-labelledby="nav-block-tab">
-        <table class="table table-sm table table-success table-striped">
+        <table class="table table-success table-striped">
           <% if @blocked_sites.empty? %>
-            <h2 class="nothing-to-display">No blocked sites yet.</h2>
+            <p class="nothing-to-display">No blocked sites yet.</p>
           <% else %>
             <%= render 'table_header' %>
           <% end %>
           <tbody>
             <% @blocked_sites.each_with_index do |site, index| %>
               <tr>
-                <th scope="row"><%= index + 1 %></th>
                 <td><%= site.risk_score %></td>
                 <td><%= site.referral_site %></td>
                 <td><%= site.reason %></td>
@@ -66,14 +65,13 @@
       <div class="tab-pane fade" id="nav-trust" role="tabpanel" aria-labelledby="nav-trust-tab">
         <table class="table table-success table-striped">
             <% if @trusted_sites.empty? %>
-              <h2 class="nothing-to-display">No trusted sites yet.</h2>
+              <p class="nothing-to-display">No trusted sites yet.</p>
             <% else %>
               <%= render 'table_header' %>
             <% end %>
             <tbody>
               <% @trusted_sites.each_with_index do |site, index| %>
                 <tr>
-                  <th scope="row"><%= index + 1 %></th>
                   <td><%= site.risk_score %> </td>
                   <td><%= site.referral_site %></td>
                   <td><%= site.reason %></td>
