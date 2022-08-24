@@ -8,9 +8,15 @@
   border-radius: 10px;
   width: 100%;
   margin-right: 8px;
-  grid-row: auto
+  grid-row: auto;
+
 }
 
-.analytics-card {
-  justify-content: center;
-}
+.analytics-card-space {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #cce6e2;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }

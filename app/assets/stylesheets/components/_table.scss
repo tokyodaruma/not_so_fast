@@ -1,10 +1,40 @@
-.table-success .table-striped th,
-.table-success .table-striped td {
-  overflow-wrap: break-word;
-}
-
-.table-container {
+.sites-container {
   margin-left: 48px;
 	margin-right: 48px;
 }
 
+.table-striped {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  min-width: 400px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  margin-top: 0;
+}
+
+.styled-table thead tr {
+  background-color: #CCE6E2;
+  text-align: left;
+}
+
+.table-striped th,
+.table-striped td {
+  background-color: #CCE6E2;
+  padding: 12px 15px;
+}
+
+.table-striped tbody tr {
+  background-color: #CCE6E2;
+  border-bottom: 1px solid #dddddd;
+
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+  background-color: #CCE6E2;
+}
+
+.table-striped tbody tr:last-of-type {
+  border-bottom: 2px solid transparent;
+}
