@@ -1,5 +1,6 @@
 let targetUrl = window.location.host;
 let checkUrl = window.location.href;
+let referrerUrl = window.document.referrer;
 const isoDateString = new Date().toISOString();
 
 const myHeaders = new Headers({
@@ -106,10 +107,12 @@ function checkRiskScore() {
         {
           "url": targetUrl,
           "reason": `A ${data.risk_score} risk score was given for this URL`,
-          "referral_site": targetUrl,
+          "referral_site": referrerUrl,
           "detections": data.detections,
           "risk_score": data.risk_score,
-          "status": "pending"
+          "status": "pending",
+          "is_domain_recent": data.is_domain_recent,
+          "webpage_title": data.webpage_title
         }
       }
       if (data.risk_score > 1) {
