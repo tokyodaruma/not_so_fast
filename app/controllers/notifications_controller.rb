@@ -14,7 +14,7 @@ class NotificationsController < ApplicationController
       @site.update(site_params)
       redirect_to sites_path, notice: 'Notification was successfully updated.'
     else
-      render :edit
+      render :index
     end
   end
 
