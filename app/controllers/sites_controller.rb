@@ -70,7 +70,15 @@ class SitesController < ApplicationController
 
   def set_params
     if params.include?("site") && !params.include?("notification")
-      @site_params = params.require(:site).permit(:url, :reason, :referral_site, :notification_id, :detections, :risk_score, :status)
+      @site_params = params.require(:site).permit(:url,
+                                                  :reason,
+                                                  :referral_site,
+                                                  :notification_id,
+                                                  :detections,
+                                                  :risk_score,
+                                                  :status,
+                                                  :is_domain_recent,
+                                                  :webpage_title)
     else
       @notification_params, @site_params = params.require(%i[notification site])
       @notification_params = @notification_params.permit(:read)

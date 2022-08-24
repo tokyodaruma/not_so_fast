@@ -109,7 +109,9 @@ function checkRiskScore() {
           "referral_site": targetUrl,
           "detections": data.detections,
           "risk_score": data.risk_score,
-          "status": "pending"
+          "status": "pending",
+          "is_domain_recent": data.is_domain_recent,
+          "webpage_title": data.webpage_title
         }
       }
       if (data.risk_score > 1) {
