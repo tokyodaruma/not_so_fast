@@ -1,6 +1,6 @@
-<div class="sites-container">
+<div class="sites-container px-4">
   <h1>Sites</h1>
-      <div class="row">
+      <div class="row gx-5">
         <div class="col-6">
           <div class="analytics-card">
             <div class="analytics-card-space">
@@ -44,7 +44,15 @@
           <tbody>
             <% @blocked_sites.each_with_index do |site, index| %>
               <tr>
-                <td><%= site.risk_score %></td>
+                <% if site.risk_score <= 25 %>
+                  <td> <strong> <p style="color:#f4db0a"> 1 </p> </strong></td>
+                <% elsif site.risk_score <= 50 %>
+                  <td> <strong> <p style="color:#f4af0a">  2 </p> </strong></td>
+                <% elsif site.risk_score <= 75 %>
+                  <td> <strong> <p style="color:#e74404">  3 </p> </strong></td>
+                <% else %>
+                  <td> <strong> <p style="color:#b20811">  4 </p> </strong></td>
+                <% end %>
                 <td><%= site.referral_site %></td>
                 <td><%= site.reason %></td>
                 <td>

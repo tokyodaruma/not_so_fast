@@ -1,6 +1,11 @@
 .sites-container {
   margin-left: 48px;
 	margin-right: 48px;
+
+h1 {
+  text-align: center;
+  margin: 50px;
+}
 }
 
 .table-striped {
@@ -16,19 +21,15 @@
 
 .styled-table thead tr {
   background-color: #CCE6E2;
+  border-top-right-radius: 8px;
   text-align: left;
 }
 
 .table-striped th,
 .table-striped td {
   background-color: #CCE6E2;
-  padding: 12px 15px;
-}
-
-.table-striped tbody tr {
-  background-color: #CCE6E2;
-  border-bottom: 1px solid #dddddd;
-
+  text-align: start;
+  padding: 15px;
 }
 
 .table-striped tbody tr:nth-of-type(even) {
