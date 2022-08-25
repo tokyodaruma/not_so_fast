@@ -2,6 +2,7 @@ class SitesController < ApplicationController
   before_action :set_params, only: %i[update]
 
   def index
+    @tlds = Site.pluck(:url).map{ |url| URI.parse(url).host.split('.').last }.tally
     @sites = policy_scope(Site)
     @blocked_sites = @sites.where(status: :blocked)
     @trusted_sites = @sites.where(status: :trusted)
