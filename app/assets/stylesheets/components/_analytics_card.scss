@@ -1,0 +1,21 @@
+.analytics-cards {
+  background-color: white;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(9, 9, 9, 0.2);
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  width: 100%;
+  margin-right: 8px;
+  grid-row: auto;
+
+}
+
+.analytics-card-space {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #cce6e2;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }

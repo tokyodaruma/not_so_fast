@@ -1,5 +1,5 @@
 class SitesController < ApplicationController
-  before_action :set_site, only: %i[update]
+  before_action :set_params, only: %i[update]
 
   def index
     @sites = policy_scope(Site)
@@ -44,7 +44,15 @@ class SitesController < ApplicationController
 
   # PATCH/PUT /sites/1
   def update
-    if @site.update(site_params)
+    @site = Site.find(params[:id])
+    # updating read status on notifications#index
+    if @site.update(@site_params) && params.include?("notification")
+      @notification = Notification.find(params[:id])
+      @notification.update(@notification_params)
+      redirect_to sites_path, notice: 'Site was successfully updated.'
+    # updating site#index block/unblock
+    elsif @site.update(@site_params)
+      authorize @site
       redirect_to sites_path, notice: 'Site was successfully updated.'
     else
       render :edit
@@ -53,12 +61,27 @@ class SitesController < ApplicationController
 
   private
 
-  def set_site
-    @site = Site.find(params[:id])
-    authorize @site
-  end
+  # def set_site
+  #   @site = Site.find(params[:id])
+  #   @notification = Notification.find(params[:id])
+  #   authorize @site
+  #   authorize @notification
+  # end
 
-  def site_params
-    params.require(:site).permit(:status, :reason, :url)
+  def set_params
+    if params.include?("site") && !params.include?("notification")
+      @site_params = params.require(:site).permit(:url,
+                                                  :reason,
+                                                  :referral_site,
+                                                  :notification_id,
+                                                  :detections,
+                                                  :risk_score,
+                                                  :status,
+                                                  :is_domain_recent,
+                                                  :webpage_title)
+    else
+      @notification_params, @site_params = params.require(%i[notification site])
+      @notification_params = @notification_params.permit(:read)
+    end
   end
 end

@@ -3,6 +3,11 @@
   "version": "1.0",
   "description": "Check user's current URL",
   "manifest_version": 3,
+  "icons": {
+    "16": "images/icon_16x16.png",
+    "48": "images/icon_48x48.png",
+    "128": "images/icon_128x128.png"
+  },
   "background": {
     "service_worker": "background.js"
   },
@@ -12,12 +17,14 @@
     "activeTab"
   ],
   "action": {
-
+    "default_title": "notsofast extension",
+    "default_icon": "images/icon_48x48.png",
+    "default_popup": "popup.html"
   },
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["content-script.js"]
+      "js": ["content-script-test.js"]
     }
   ]
 }

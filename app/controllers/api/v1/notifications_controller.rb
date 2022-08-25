@@ -8,7 +8,7 @@ class Api::V1::NotificationsController < Api::V1::BaseController
   end
 
   def update
-    if @notification.update(notification_params)
+    if @notification.update(@notification_params)
       render :index
     else
       render_error
@@ -24,6 +24,8 @@ class Api::V1::NotificationsController < Api::V1::BaseController
     authorize @notification
     if @notification.save
       @site.save
+      SendSmsService.new("NotSoFast: Care receiver accessed '#{@site.url}' which was flagged as suspicious.
+        Check your dashboard to review this site.").call
       render :index, status: :created
     else
       render_error
@@ -40,7 +42,15 @@ class Api::V1::NotificationsController < Api::V1::BaseController
   def set_params
     @notification_params, @site_params = params.require(%i[notification site])
     @notification_params = @notification_params.permit(:accessed_at, :description, :read)
-    @site_params = @site_params.permit(:url, :reason, :referral_site, :notification_id, :detections, :risk_score, :status)
+    @site_params = @site_params.permit(:url,
+                                       :reason,
+                                       :referral_site,
+                                       :notification_id,
+                                       :detections,
+                                       :risk_score,
+                                       :status,
+                                       :is_domain_recent,
+                                       :webpage_title)
   end
 
   def render_error

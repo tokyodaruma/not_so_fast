@@ -113,9 +113,11 @@ results = JSON.parse(risk_results_serialized)
     notification: notification,
     reason: Faker::Lorem.sentence,
     url: Faker::Internet.url,
-    referral_site: Faker::Internet.url,
+    referral_site: Faker::Internet.domain_name,
     detections: rand(1..10),
-    risk_score: rand(1..100)
+    risk_score: rand(1..100),
+    is_domain_recent: ["yes", "no", "yes"].sample,
+    webpage_title: ["Subscribe", "Call us", "Message us"].sample
   )
 
   puts "Notification ##{notification.id} and Site ##{site.id} made."
