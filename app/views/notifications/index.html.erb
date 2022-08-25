@@ -1,8 +1,17 @@
-
 <div class="notifications-container">
     <div class=".col-6 .col-md-4 analytics-cards">
       <div class="analytics-card">
-      Analytics Cards
+        <p>Notifications in last 7 days:</p>
+        <%= line_chart Notification.where(user: current_user)
+                                   .group_by_day(:accessed_at)
+                                   .count, empty: "No data",
+                                   xmin: Date.today - 7,
+                                   xmax: Date.today,
+                                   xtitle: "Last 7 days",
+                                   ytitle: "# of notifications",
+                                   curve: false,
+                                   points: false,
+                                   loading: "Fetching notifications..." %>
       </div>
     </div>
 
