@@ -20,10 +20,11 @@
   opacity:1;
 }
 
-.notification-card h2 {
-  font-size: 16px;
+.notification-cards h2 {
+  font-size: 24px;
   font-weight: bold;
-  margin: 0;
+  margin-top: 32px;
+  align-self: center;
 }
 
 .notification-card .card-notification-infos {
