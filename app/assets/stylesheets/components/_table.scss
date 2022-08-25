@@ -20,22 +20,14 @@ h1 {
 }
 
 .styled-table thead tr {
-  background-color: #CCE6E2;
+  background-color: #f4f8f8;
   border-top-right-radius: 8px;
   text-align: left;
 }
 
 .table-striped th,
 .table-striped td {
-  background-color: #CCE6E2;
+  background-color: #f4f8f8;
   text-align: start;
   padding: 15px;
-}
-
-.table-striped tbody tr:nth-of-type(even) {
-  background-color: #CCE6E2;
-}
-
-.table-striped tbody tr:last-of-type {
-  border-bottom: 2px solid transparent;
 }
