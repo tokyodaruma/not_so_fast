@@ -4,22 +4,21 @@
         <div class="col-6">
           <div class="analytics-card">
             <div class="analytics-card-space">
-              <h2> Domain name </h2>
+              <h2> Domain tld </h2>
                 <!-- domain pie chart -->
-                <%#= tld = site.url.match(\.[^.]{2,3}(?:\.[^.]{2,3})?$) %>
                   <%= pie_chart Site.group(:url).count %>
-                  <%#= pie_chart Site.group(tld).count %>
+                  <%# URI.parse(site.url).host.split('.').last %>
                 <!-- domain recent bar chart -->
             </div>
             <div class="analytics-card-space">
-              <h2>Domain recency</h2>
+              <h2>Is Domain recent?</h2>
                 <%=  pie_chart Site.group(:is_domain_recent).count %>
                 <%#= bar_chart Shirt.group(:size).sum(:price) %>
             </div>
             <div class="analytics-card-space">
               <!-- webpage title Keyword -->
-              <h2> Keyword - Risk Score relation </h2>
-                <%= bar_chart Site.group(:webpage_title).sum(:risk_score), xtitle: "Risk score", ytitle: "Keyword" %>
+              <h2> Keyword - Risk Score Relation </h2>
+                <%= bar_chart Site.group(:webpage_title).sum(:risk_score), xtitle: "Risk score", ytitle: "Keyword", xmin: "0", xmax: "100" %>
                 <%#= column_chart Site.group_by_year(:created_at, format: "%a").count %>
             </div>
           </div>
@@ -45,13 +44,13 @@
             <% @blocked_sites.each_with_index do |site, index| %>
               <tr>
                 <% if site.risk_score <= 25 %>
-                  <td> <strong> <p style="color:#f4db0a"> 1 </p> </strong></td>
+                  <td> <strong> <p style="color:#fff10a"> 1 </p> </strong></td>
                 <% elsif site.risk_score <= 50 %>
-                  <td> <strong> <p style="color:#f4af0a">  2 </p> </strong></td>
+                  <td> <strong> <p style="color:#fec208"> 2 </p> </strong></td>
                 <% elsif site.risk_score <= 75 %>
-                  <td> <strong> <p style="color:#e74404">  3 </p> </strong></td>
+                  <td> <strong> <p style="color:#ff2d08"> 3 </p> </strong></td>
                 <% else %>
-                  <td> <strong> <p style="color:#b20811">  4 </p> </strong></td>
+                  <td> <strong> <p style="color:#cf240a"> 4 </p> </strong></td>
                 <% end %>
                 <td><%= site.referral_site %></td>
                 <td><%= site.reason %></td>
