@@ -24,6 +24,8 @@ class Api::V1::NotificationsController < Api::V1::BaseController
     authorize @notification
     if @notification.save
       @site.save
+      SendSmsService.new("NotSoFast: Care receiver accessed '#{@site.url}' which was flagged as suspicious.
+        Check your dashboard to review this site.").call
       render :index, status: :created
     else
       render_error

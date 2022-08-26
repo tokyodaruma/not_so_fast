@@ -80,3 +80,5 @@ gem 'cloudinary', '~> 1.16.0'
 gem 'twilio-ruby', '~> 5.70.0'
 
 gem "chartkick"
+
+gem "groupdate"
