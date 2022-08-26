@@ -1,5 +1,5 @@
-<div class="sites-container px-4">
-  <h1>Sites</h1>
+<div class="sites-container">
+<h1>Sites Overview</h1>
     <div class='my-legend'>
       <div class='legend-title'>Risk Score Level</div>
       <div class='legend-scale'>
@@ -12,103 +12,120 @@
       </div>
       <div class='legend-source'><a href="#link to source"></a></div>
       </div>
-      <div class="row gx-5">
-        <div class="col-6">
-          <div class="analytics-card">
-            <div class="analytics-card-space">
-              <h2> Domain tld </h2>
-                <!-- domain pie chart -->
-                  <%= pie_chart @tlds %>
-                  <%# URI.parse(site.url).host.split('.').last %>
-                <!-- domain recent bar chart -->
+
+      <div class="row">
+        <div class="col">
+          <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-block-tab" data-bs-toggle="tab" data-bs-target="#nav-block" type="button" role="tab" aria-controls="nav-block" aria-selected="true">Block</button>
+                <button class="nav-link" id="nav-trust-tab" data-bs-toggle="tab" data-bs-target="#nav-trust" type="button" role="tab" aria-controls="nav-trust" aria-selected="false">Trust</button>
             </div>
-            <div class="analytics-card-space">
-              <h2>Is Domain recent?</h2>
-                <%=  pie_chart Site.group(:is_domain_recent).count %>
-                <%#= bar_chart Shirt.group(:size).sum(:price) %>
-            </div>
-            <div class="analytics-card-space">
-              <!-- webpage title Keyword -->
-              <h2> Keyword - Risk Score Relation </h2>
-                <%= bar_chart Site.group(:webpage_title).sum(:risk_score), xtitle: "Risk score", ytitle: "Keyword", xmin: "0", xmax: "100" %>
-                <%#= column_chart Site.group_by_year(:created_at, format: "%a").count %>
+          </nav>
+    <!-- Blocked sites -->
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-block" role="tabpanel" aria-labelledby="nav-block-tab">
+              <table class="table table-striped">
+                <% if @blocked_sites.empty? %>
+                  <p class="nothing-to-display">No blocked sites yet.</p>
+                <% else %>
+                  <%= render 'table_header' %>
+                <% end %>
+                <tbody>
+                  <% @blocked_sites.each_with_index do |site, index| %>
+                    <tr>
+                      <% if site.risk_score <= 25 %>
+                        <td> <strong> <p style="color:#fff10a"> <i class="fas fa-exclamation-triangle"></i> </p> </strong></td>
+                      <% elsif site.risk_score <= 50 %>
+                        <td> <strong> <p style="color:#fec208"><i class="fas fa-exclamation-triangle"></i></p> </strong></td>
+                      <% elsif site.risk_score <= 75 %>
+                        <td> <strong> <p style="color:#ff2d08"><i class="fas fa-exclamation-triangle"></i></p> </strong></td>
+                      <% else %>
+                        <td> <strong> <p style="color:#cf240a"><i class="fas fa-exclamation-triangle"></i></p> </strong></td>
+                      <% end %>
+                      <td><%= site.referral_site %></td>
+                      <td><%= site.reason %></td>
+                      <td>
+                        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#site-<%= site.id %>">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <%= render 'modal', site: site %>
+                      </td>
+                      <td><%= render "change_status", site: site, caption: "Unblock", status: :trusted %>
+                      </td>
+                    </tr>
+                  </tbody>
+                  <% end %>
+                </table>
+              </div>
+            <!-- Trusted sites -->
+            <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade" id="nav-trust" role="tabpanel" aria-labelledby="nav-trust-tab">
+              <table class="table table-striped">
+                  <% if @trusted_sites.empty? %>
+                    <p class="nothing-to-display">No trusted sites yet.</p>
+                  <% else %>
+                    <%= render 'table_header' %>
+                  <% end %>
+                  <tbody>
+                    <% @trusted_sites.each_with_index do |site, index| %>
+                      <tr>
+                        <% if site.risk_score <= 25 %>
+                          <td> <strong> <p style="color:#fff10a"> <i class="fas fa-exclamation-triangle"></i> </p> </strong></td>
+                        <% elsif site.risk_score <= 50 %>
+                          <td> <strong> <p style="color:#fec208"><i class="fas fa-exclamation-triangle"></i></p> </strong></td>
+                        <% elsif site.risk_score <= 75 %>
+                          <td> <strong> <p style="color:#ff2d08"><i class="fas fa-exclamation-triangle"></i></p> </strong></td>
+                        <% else %>
+                          <td> <strong> <p style="color:#cf240a"><i class="fas fa-exclamation-triangle"></i></p> </strong></td>
+                        <% end %>
+                        <td><%= site.referral_site %></td>
+                        <td><%= site.reason %></td>
+                        <td>
+                          <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#site-<%= site.id %>">
+                            <i class="fas fa-edit"></i>
+                          </button>
+                          <%= render 'modal', site: site %>
+                        </td>
+                        <td><%= render "change_status", site: site, caption: "Block", status: :blocked %>
+                        </td>
+                      </tr>
+                  </tbody>
+                  <% end %>
+                </table>
+              </div>
             </div>
           </div>
         </div>
-
-    <div class="col-6">
-      <nav>
-        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <button class="nav-link active" id="nav-block-tab" data-bs-toggle="tab" data-bs-target="#nav-block" type="button" role="tab" aria-controls="nav-block" aria-selected="true">Block</button>
-            <button class="nav-link" id="nav-trust-tab" data-bs-toggle="tab" data-bs-target="#nav-trust" type="button" role="tab" aria-controls="nav-trust" aria-selected="false">Trust</button>
-        </div>
-      </nav>
-    <!-- Blocked sites -->
-    <div class="tab-content" id="nav-tabContent">
-      <div class="tab-pane fade show active" id="nav-block" role="tabpanel" aria-labelledby="nav-block-tab">
-        <table class="table table-striped">
-          <% if @blocked_sites.empty? %>
-            <p class="nothing-to-display">No blocked sites yet.</p>
-          <% else %>
-            <%= render 'table_header' %>
-          <% end %>
-          <tbody>
-            <% @blocked_sites.each_with_index do |site, index| %>
-              <tr>
-                <% if site.risk_score <= 25 %>
-                  <td> <strong> <p style="color:#fff10a"> 1 </p> </strong></td>
-                <% elsif site.risk_score <= 50 %>
-                  <td> <strong> <p style="color:#fec208"> 2 </p> </strong></td>
-                <% elsif site.risk_score <= 75 %>
-                  <td> <strong> <p style="color:#ff2d08"> 3 </p> </strong></td>
-                <% else %>
-                  <td> <strong> <p style="color:#cf240a"> 4 </p> </strong></td>
-                <% end %>
-                <td><%= site.referral_site %></td>
-                <td><%= site.reason %></td>
-                <td>
-                  <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#site-<%= site.id %>">
-                    <i class="fas fa-edit"></i>
-                  </button>
-                  <%= render 'modal', site: site %>
-                </td>
-                <td><%= render "change_status", site: site, caption: "Unblock", status: :trusted %>
-                </td>
-              </tr>
-            </tbody>
-            <% end %>
-          </table>
-        </div>
-      <!-- Trusted sites -->
-      <div class="tab-content" id="nav-tabContent">
-      <div class="tab-pane fade" id="nav-trust" role="tabpanel" aria-labelledby="nav-trust-tab">
-        <table class="table table-success table-striped">
-            <% if @trusted_sites.empty? %>
-              <p class="nothing-to-display">No trusted sites yet.</p>
-            <% else %>
-              <%= render 'table_header' %>
-            <% end %>
-            <tbody>
-              <% @trusted_sites.each_with_index do |site, index| %>
-                <tr>
-                  <td><%= site.risk_score %> </td>
-                  <td><%= site.referral_site %></td>
-                  <td><%= site.reason %></td>
-                  <td>
-                    <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#site-<%= site.id %>">
-                      <i class="fas fa-edit"></i>
-                    </button>
-                    <%= render 'modal', site: site %>
-                  </td>
-                  <td><%= render "change_status", site: site, caption: "Block", status: :blocked %>
-                  </td>
-                </tr>
-            </tbody>
-            <% end %>
-          </table>
+      </div>
+      <h1>Analytics</h1>
+      <div class="analytics-card-sites">
+        <div class="row">
+          <div class="col">
+            <div class="analytics-card-space">
+              <h2> Domain TLD </h2>
+                  <%= pie_chart @tlds, width: "300px", height: "300px" %>
+            </div>
+          </div>
+          <div class="col">
+            <div class="analytics-card-space">
+              <h2>Is Domain recent?</h2>
+                <%=  pie_chart @domain_recent, width: "300px", height: "300px" %>
+            </div>
+          </div>
+          <div class="col">
+            <div class="analytics-card-space">
+              <h2> Keywords </h2>
+              <%= column_chart @keywords, width: "300px", height: "300px" %>
+                <%#= bar_chart Site.group(:webpage_title).sum(:risk_score), xtitle: "Risk score", ytitle: "Keyword", width: "300px", height: "300px" %>
+            </div>
+          </div>
+          <div class="col">
+            <div class="analytics-card-space">
+              <h2> Risk Score </h2>
+                <%=  pie_chart @risk_score, width: "300px", height: "300px" %>
+                <%#= bar_chart Site.group(:webpage_title).sum(:risk_score), xtitle: "Risk score", ytitle: "Keyword", width: "300px", height: "300px" %>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
-</div>
