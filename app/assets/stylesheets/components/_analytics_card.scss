@@ -7,15 +7,30 @@
   flex-direction: column;
   border-radius: 10px;
   width: 100%;
-  margin-right: 8px;
+  margin-right: 0;
+  margin-right: 0;
   grid-row: auto;
+}
 
+.analytics-cards-sites {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(9, 9, 9, 0.2);
+  margin-right: 8px;
+  margin-bottom: 16px;
+  border-radius: 8px;
 }
 
 .analytics-card-space {
+    text-align: center;
+    margin-top: 30px;
     margin-bottom: 30px;
-    padding: 20px;
+    padding: 30px;
     background-color: #f7f9f9;
     border-radius: 8px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 360px;
+    height: 390px;
   }

@@ -3,6 +3,9 @@ class SitesController < ApplicationController
 
   def index
     @tlds = Site.pluck(:url).map{ |url| URI.parse(url).host.split('.').last }.tally
+    @domain_recent = Site.group(:is_domain_recent).count
+    @keywords = Site.group(:webpage_title).count
+    @risk_score = Site.group(:risk_score).count
     @sites = policy_scope(Site)
     @blocked_sites = @sites.where(status: :blocked)
     @trusted_sites = @sites.where(status: :trusted)

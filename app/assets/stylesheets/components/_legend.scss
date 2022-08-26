@@ -1,5 +1,9 @@
+.my-legend {
+  margin-bottom: 8px;
+}
+
 .my-legend .legend-title {
-  text-align: right;
+  text-align: left;
   margin-bottom: 8px;
   font-weight: bold;
   font-size: 90%;
@@ -8,19 +12,19 @@
 .my-legend .legend-scale ul {
   margin: 0;
   padding: 0;
-  float: right;
+  float: left;
   list-style: none;
   }
 
 .my-legend .legend-scale ul li {
   display: block;
-  float: right;
+  float: left;
   width: 50px;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
   text-align: center;
   font-size: 80%;
   list-style: none;
-  text-align: right;
+  text-align: left;
 
   }
 
@@ -40,4 +44,3 @@
 .my-legend a {
   color: #777;
 }
-
