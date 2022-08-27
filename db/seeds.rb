@@ -123,6 +123,7 @@ suspicious_sites.each do |site|
     detections: results["data"]["report"]["domain_blacklist"]["detections"],
     risk_score: results["data"]["report"]["risk_score"]["result"],
     is_domain_recent: results["data"]["report"]["security_checks"]["is_domain_recent"],
+    created_at: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :short),
     webpage_title: results["data"]["report"]["web_page"]["title"]
   )
 

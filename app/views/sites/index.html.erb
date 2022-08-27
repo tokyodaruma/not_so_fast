@@ -12,7 +12,6 @@
       </div>
       <div class='legend-source'><a href="#link to source"></a></div>
       </div>
-
       <div class="row">
         <div class="col">
           <nav>
@@ -34,13 +33,13 @@
                   <% @blocked_sites.each_with_index do |site, index| %>
                     <tr>
                       <% if site.risk_score <= 25 %>
-                        <td> <strong> <p style="color:#fff10a"> <i class="fas fa-exclamation-triangle"></i> </p> </strong></td>
+                        <td> <strong> <p style="color:#fff10a"><i class="fas fa-exclamation-triangle icon-shadow"></i> </p> </strong></td>
                       <% elsif site.risk_score <= 50 %>
-                        <td> <strong> <p style="color:#fec208"><i class="fas fa-exclamation-triangle"></i></p> </strong></td>
+                        <td> <strong> <p style="color:#fec208"><i class="fas fa-exclamation-triangle icon-shadow"></i></p> </strong></td>
                       <% elsif site.risk_score <= 75 %>
-                        <td> <strong> <p style="color:#ff2d08"><i class="fas fa-exclamation-triangle"></i></p> </strong></td>
+                        <td> <strong> <p style="color:#ff2d08"><i class="fas fa-exclamation-triangle icon-shadow"></i></p> </strong></td>
                       <% else %>
-                        <td> <strong> <p style="color:#cf240a"><i class="fas fa-exclamation-triangle"></i></p> </strong></td>
+                        <td> <strong> <p style="color:#cf240a"><i class="fas fa-exclamation-triangle icon-shadow"></i></p> </strong></td>
                       <% end %>
                       <td><%= URI.parse(site.url).host %></td>
                       <td><%= site.reason %></td>
@@ -70,13 +69,13 @@
                     <% @trusted_sites.each_with_index do |site, index| %>
                       <tr>
                         <% if site.risk_score <= 25 %>
-                          <td> <strong> <p style="color:#fff10a"> <i class="fas fa-exclamation-triangle"></i> </p> </strong></td>
+                          <td> <strong> <p style="color:#fff10a"> <i class="fas fa-exclamation-triangle icon-shadow"></i> </p> </strong></td>
                         <% elsif site.risk_score <= 50 %>
-                          <td> <strong> <p style="color:#fec208"><i class="fas fa-exclamation-triangle"></i></p> </strong></td>
+                          <td> <strong> <p style="color:#fec208"><i class="fas fa-exclamation-triangle icon-shadow"></i></p> </strong></td>
                         <% elsif site.risk_score <= 75 %>
-                          <td> <strong> <p style="color:#ff2d08"><i class="fas fa-exclamation-triangle"></i></p> </strong></td>
+                          <td> <strong> <p style="color:#ff2d08"><i class="fas fa-exclamation-triangle icon-shadow"></i></p> </strong></td>
                         <% else %>
-                          <td> <strong> <p style="color:#cf240a"><i class="fas fa-exclamation-triangle"></i></p> </strong></td>
+                          <td> <strong> <p style="color:#cf240a"><i class="fas fa-exclamation-triangle icon-shadow"></i></p> </strong></td>
                         <% end %>
                         <td><%= URI.parse(site.url).host %></td>
                         <td><%= site.reason %></td>
@@ -108,7 +107,7 @@
           </div>
           <div class="col">
             <div class="analytics-card-space">
-              <h2>Is Domain recent?</h2>
+              <h2>Recent Domain?</h2>
                 <%=  pie_chart @domain_recent, width: "300px", height: "300px" %>
             </div>
           </div>
@@ -121,9 +120,17 @@
           </div>
           <div class="col">
             <div class="analytics-card-space">
-              <h2> Risk Score </h2>
-                <%=  pie_chart @risk_score, width: "300px", height: "300px" %>
-                <%#= bar_chart Site.group(:webpage_title).sum(:risk_score), xtitle: "Risk score", ytitle: "Keyword", width: "300px", height: "300px" %>
+              <h2> Site visited</h2>
+                <%= line_chart @sites_visited, width: "300px", height: "300px", xtitle: "Hour", ytitle: "Count" %>
+            </div>
+          </div>
+          <div class="col">
+            <div class="analytics-card-space">
+              <h2> Referral Site </h2>
+                <%= bar_chart @referral_site, width: "300px", height: "300px" %>
+            </div>
+            </div>
+            <div class="col">
             </div>
           </div>
         </div>

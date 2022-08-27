@@ -4,8 +4,9 @@ class SitesController < ApplicationController
   def index
     @tlds = Site.where(user: current_user).pluck(:url).map { |url| URI.parse(url).host.split('.').last }.tally
     @domain_recent = Site.where(user: current_user).group(:is_domain_recent).count
+    @referral_site = Site.where(user: current_user).group(:referral_site).count
     @keywords = Site.where(user: current_user).group(:webpage_title).count
-    @risk_score = Site.where(user: current_user).group(:risk_score).count
+    @sites_visited = Site.group_by_hour(:created_at, format: "%H").count
     @sites = policy_scope(Site)
     @blocked_sites = @sites.where(status: :blocked)
     @trusted_sites = @sites.where(status: :trusted)
