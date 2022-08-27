@@ -81,4 +81,4 @@ gem 'twilio-ruby', '~> 5.70.0'
 
 gem "chartkick"
 
-gem "groupdate"
+gem 'groupdate'

@@ -5,7 +5,7 @@ const isoDateString = new Date().toISOString();
 
 const myHeaders = new Headers({
   'Content-Type': 'application/json',
-  'X-User-Token': 'T8VXNxv5nySrZu',
+  'X-User-Token': 'zPcyK9rs3cdpb-1mUfQY',
   'X-User-Email': "fake@fake.me"
 });
 
@@ -21,13 +21,14 @@ const checkIfSiteIsBlocked = new Request('https://www.notsofast.co/api/v1/sites'
   .then(sites => {
     if (typeof sites !== "undefined") {
       for (let count in sites) {
-        if (sites[count].status=="blocked" && sites[count].url == targetUrl) {
+        let url = new URL(sites[count].url);
+        if (sites[count].status=="blocked" && url.hostname == targetUrl) {
           console.log("blocked");
           return "blocked";
-        } else if (sites[count].status=="trusted" && sites[count].url == targetUrl) {
+        } else if (sites[count].status=="trusted" && url.hostname == targetUrl) {
           console.log("trusted");
           return "trusted";
-        } else if (sites[count].status == "pending" && sites[count].url == targetUrl) {
+        } else if (sites[count].status == "pending" && url.hostname == targetUrl) {
           return "pending"
         }
       }
@@ -48,14 +49,16 @@ const checkIfSiteIsBlocked = new Request('https://www.notsofast.co/api/v1/sites'
       style="display: flex;
       justify-content: center;
       border-radius: 18px;
-      background-color: grey;
+      background-color: white;
       margin-left: auto;
       margin-right: auto;
       align-items: center;
       flex-direction: column;
-      color: red;
+      margin-top: 48px;
+      color: black;
       height: 500px;
       width: 500px;">
+      <h1 style="text-align: center; font-family: Helvetica Neue">NotSoFast</h1>
       <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
       width="150px" height="150px" viewBox="0 0 478.125 478.125" style="enable-background:new 0 0 478.125 478.125;"
       xml:space="preserve">
@@ -72,7 +75,7 @@ const checkIfSiteIsBlocked = new Request('https://www.notsofast.co/api/v1/sites'
           </g>
         </g>
       </svg>
-        <h1>NotSofast malicious  blocked</h1>
+        <h1 style="text-align: center; font-family: Helvetica Neue">Your caretaker blocked this suspicious site.</h1>
     </div>
   </body>
   `;
@@ -121,7 +124,7 @@ function checkRiskScore() {
 
         "site":
         {
-          "url": targetUrl,
+          "url": checkUrl,
           "reason": `A ${data.risk_score} risk score was given for this URL`,
           "referral_site": referrerUrl,
           "detections": data.detections,
