@@ -117,6 +117,7 @@ results = JSON.parse(risk_results_serialized)
     detections: rand(1..10),
     risk_score: rand(1..100),
     is_domain_recent: ["yes", "no", "yes"].sample,
+    created_at: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :short),
     webpage_title: ["Subscribe", "Call us", "Message us"].sample
   )
 
