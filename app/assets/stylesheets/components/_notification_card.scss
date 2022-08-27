@@ -9,10 +9,19 @@
   width: 100%;
   margin-right: 8px;
   grid-row: auto
+  p {
+    margin-top: 0px;
+    margin-bottom: 1rem;
+    align-self: center;
+  }
 }
 
 .notification-card {
   justify-content: center;
+  margin: 10px;
+  padding: 10px;
+  box-shadow: 0 0 15px rgba(9, 9, 9, 0.2);
+  border-radius: 10px;
 }
 
 .notification-card:hover .notification-card-infos{
@@ -20,10 +29,11 @@
   opacity:1;
 }
 
-.notification-card h2 {
-  font-size: 16px;
+.notification-cards h2 {
+  font-size: 24px;
   font-weight: bold;
-  margin: 0;
+  margin-top: 32px;
+  align-self: center;
 }
 
 .notification-card .card-notification-infos {
@@ -58,6 +68,7 @@
 .notification-card .card-notification-site-accessdate {
 
 }
+
 
 
 

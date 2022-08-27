@@ -2,10 +2,10 @@ class SitesController < ApplicationController
   before_action :set_params, only: %i[update]
 
   def index
-    @tlds = Site.pluck(:url).map{ |url| URI.parse(url).host.split('.').last }.tally
-    @domain_recent = Site.group(:is_domain_recent).count
+    @tlds = Site.where(user: current_user).pluck(:url).map { |url| URI.parse(url).host.split('.').last }.tally
+    @domain_recent = Site.where(user: current_user).group(:is_domain_recent).count
     @referral_site = Site.where(user: current_user).group(:referral_site).count
-    @keywords = Site.group(:webpage_title).count
+    @keywords = Site.where(user: current_user).group(:webpage_title).count
     @sites_visited = Site.group_by_hour(:created_at, format: "%H").count
     @sites = policy_scope(Site)
     @blocked_sites = @sites.where(status: :blocked)
