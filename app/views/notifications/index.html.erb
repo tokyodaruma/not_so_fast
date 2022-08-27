@@ -1,10 +1,18 @@
 <div class="notifications-container">
     <div class=".col-6 .col-md-4 analytics-cards">
       <div class="analytics-card">
-      Analytics Cards
+        <%= line_chart Notification.where(user: current_user)
+                                  .group_by_day(:accessed_at)
+                                  .count, empty: "No data",
+                                  xmin: Date.today - 7,
+                                  xmax: Date.today,
+                                  xtitle: "Last 7 days",
+                                  ytitle: "# of notifications",
+                                  curve: false,
+                                  points: false,
+                                  loading: "Fetching notifications..." %>
       </div>
     </div>
-
     <div class=".col-6 .col-md-4 notification-cards">
       <% if @notifications.any? %>
         <% @notifications.first(5).each do |notification| %>
@@ -26,7 +34,7 @@
         <%= render 'modal', notification: notification %>
         </div>
         <% end %>
-        <p>
+        <p >
           <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
             Show More
           </button>
