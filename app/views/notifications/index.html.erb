@@ -24,7 +24,7 @@
               </div>
             </div>
             <div class="card-notification-card-site">
-                <p><strong>URL:  </strong> <%= notification.site.url  %></p>
+                <p><strong>URL:  </strong> <%= URI.parse(notification.site.url).host  %></p>
             </div>
             <div class="notification-card-site-accessdate">
               <p><strong><i class="fas fa-history"></i></strong><%= notification.accessed_at.strftime("%F %H:%M")  %></p>
