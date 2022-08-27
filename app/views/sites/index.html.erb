@@ -42,7 +42,7 @@
                       <% else %>
                         <td> <strong> <p style="color:#cf240a"><i class="fas fa-exclamation-triangle"></i></p> </strong></td>
                       <% end %>
-                      <td><%= site.referral_site %></td>
+                      <td><%= URI.parse(site.url).host %></td>
                       <td><%= site.reason %></td>
                       <td>
                         <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#site-<%= site.id %>">
@@ -78,7 +78,7 @@
                         <% else %>
                           <td> <strong> <p style="color:#cf240a"><i class="fas fa-exclamation-triangle"></i></p> </strong></td>
                         <% end %>
-                        <td><%= site.referral_site %></td>
+                        <td><%= URI.parse(site.url).host %></td>
                         <td><%= site.reason %></td>
                         <td>
                           <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#site-<%= site.id %>">

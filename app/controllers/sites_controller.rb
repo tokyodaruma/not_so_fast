@@ -2,7 +2,7 @@ class SitesController < ApplicationController
   before_action :set_params, only: %i[update]
 
   def index
-    @tlds = Site.pluck(:url).map{ |url| URI.parse(url).host.split('.').last }.tally
+    @tlds = Site.pluck(:url).map { |url| URI.parse(url).host.split('.').last }.tally
     @domain_recent = Site.group(:is_domain_recent).count
     @keywords = Site.group(:webpage_title).count
     @risk_score = Site.group(:risk_score).count
