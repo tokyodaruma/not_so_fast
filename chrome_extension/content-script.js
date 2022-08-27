@@ -5,7 +5,7 @@ const isoDateString = new Date().toISOString();
 
 const myHeaders = new Headers({
   'Content-Type': 'application/json',
-  'X-User-Token': 'NePhNtf9PcdQtJ3b9ZRv',
+  'X-User-Token': 'zPcyK9rs3cdpb-1mUfQY',
   'X-User-Email': "fake@fake.me"
 });
 
