@@ -14,13 +14,12 @@
     <%= favicon_link_tag asset_path('cyber-security.png') %>
 
   </head>
-
   <body>
-    <%= render 'shared/navbar' %>
-    <%= render 'shared/flashes' %>
-    <%= yield %>
-    <footer>
-      <%= render 'shared/footer' %>
-    </footer>
+    <div class="page-frame-content">
+      <div class="page-frame-header"><%= render 'shared/navbar' %></div>
+        <%= render 'shared/flashes' %>
+      <div class="page-frame-body"> <%= yield %></div>
+      <div class="page-frame-footer"><footer><%= render 'shared/footer' %></footer></div>
+    </div>
   </body>
 </html>
