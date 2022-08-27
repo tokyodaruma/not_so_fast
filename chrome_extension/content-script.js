@@ -5,7 +5,7 @@ const isoDateString = new Date().toISOString();
 
 const myHeaders = new Headers({
   'Content-Type': 'application/json',
-  'X-User-Token': 'vddwy9Giq_TPMiGYxsDy',
+  'X-User-Token': 'N2Pe8Ujr62hpCoN86ieN',
   'X-User-Email': "fake@fake.me"
 });
 
@@ -47,16 +47,32 @@ const checkIfSiteIsBlocked = new Request('https://www.notsofast.co/api/v1/sites'
     <div class="blocked"
       style="display: flex;
       justify-content: center;
-      border-radius: 8px;
-      background-color: white;
+      border-radius: 18px;
+      background-color: grey;
       margin-left: auto;
       margin-right: auto;
-      margin-top: 120px;
+      align-items: center;
+      flex-direction: column;
+      color: red;
       height: 500px;
       width: 500px;">
-      <div class="header">
-        <h1>Domain is blocked</h1>
-      </div>
+      <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+      width="150px" height="150px" viewBox="0 0 478.125 478.125" style="enable-background:new 0 0 478.125 478.125;"
+      xml:space="preserve">
+        <g>
+          <g>
+            <g>
+              <circle cx="239.904" cy="314.721" r="35.878"/>
+              <path d="M256.657,127.525h-31.9c-10.557,0-19.125,8.645-19.125,19.125v101.975c0,10.48,8.645,19.125,19.125,19.125h31.9
+                c10.48,0,19.125-8.645,19.125-19.125V146.65C275.782,136.17,267.138,127.525,256.657,127.525z"/>
+              <path d="M239.062,0C106.947,0,0,106.947,0,239.062s106.947,239.062,239.062,239.062c132.115,0,239.062-106.947,239.062-239.062
+                S371.178,0,239.062,0z M239.292,409.734c-94.171,0-170.595-76.348-170.595-170.596c0-94.248,76.347-170.595,170.595-170.595
+                s170.595,76.347,170.595,170.595C409.887,333.387,333.464,409.734,239.292,409.734z"/>
+            </g>
+          </g>
+        </g>
+      </svg>
+        <h1>NotSofast malicious  blocked</h1>
     </div>
   </body>
   `;
