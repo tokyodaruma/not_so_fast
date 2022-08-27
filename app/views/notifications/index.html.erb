@@ -1,86 +1,63 @@
 <div class="notifications-container">
-    <div class=".col-6 .col-md-4 analytics-cards">
-      <div class="analytics-card">
-        <%= line_chart Notification.where(user: current_user)
-                                  .group_by_day(:accessed_at)
-                                  .count, empty: "No data",
-                                  xmin: Date.today - 7,
-                                  xmax: Date.today,
-                                  xtitle: "Last 7 days",
-                                  ytitle: "# of notifications",
-                                  curve: false,
-                                  points: false,
-                                  loading: "Fetching notifications..." %>
-      </div>
-    </div>
-    <div class=".col-6 .col-md-4 notification-cards">
-      <% if @notifications.any? %>
-        <% @notifications.first(5).each do |notification| %>
-        <div type="button" data-bs-toggle="modal" data-bs-target="#notification-<%= notification.id %>">
-          <div class="notification-card">
-            <div class="overlay">
-              <div class="notification-card-description justify-content-center">
-                <p><%= notification.description %></p>
-              </div>
-            </div>
-            <div class="card-notification-card-site">
-                <p><strong>URL:  </strong> <%= notification.site.url  %></p>
-            </div>
-            <div class="notification-card-site-accessdate">
-              <p><strong><i class="fas fa-history"></i></strong><%= notification.accessed_at.strftime("%F %H:%M")  %></p>
-            </div>
+  <div class="row">
+    <div class="page-frame-body-left col-6">
+      <div class="page-frame-body-left-up">
+      <div class="row">
+        <div class="profile-card col-6">
+          <div class="profile-card-content d-flex flex-column">
+            <% if current_user.care_receiver.nil? %>
+            <%= render 'current_user_profile' %>
+            <% else %>
+            <%= render 'care_receiver_profile' %>
+            <% end %>
           </div>
-        <!-- Modal -->
-        <%= render 'modal', notification: notification %>
         </div>
-        <% end %>
-        <p >
-          <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            Show More
-          </button>
-        </p>
-        <div class="collapse" id="collapseExample">
-          <% @notifications[5..-1]&.each do |notification| %>
-            <div type="button" data-bs-toggle="modal" data-bs-target="#notification-<%= notification.id %>">
-              <div class="notification-card">
-                <div class="overlay">
-                  <div class="notification-card-description justify-content-center">
-                    <p><%= notification.description %></p>
-                  </div>
-                </div>
-                <div class="card-notification-card-site">
-                  <h2>URL:</h2>
-                  <p><%= notification.site.url  %></p>
-                </div>
-                <div class="notification-card-site-accessdate">
-                  <h2><i class="fas fa-history"></i></h2>
-                  <p><%= notification.accessed_at.strftime("%F %H:%M")  %></p>
+        <div class="col-6">
+        </div>
+      </div>
+      </div>
+      <div class="page-frame-body-left-bottom">
+        <div class="analytics-cards">
+          <div class="analytics-card">
+            <%= line_chart Notification.where(user: current_user)
+                                      .group_by_day(:accessed_at)
+                                      .count, empty: "No data",
+                                      xmin: Date.today - 7,
+                                      xmax: Date.today,
+                                      xtitle: "Last 7 days",
+                                      ytitle: "# of notifications",
+                                      curve: false,
+                                      points: false,
+                                      loading: "Fetching notifications..." %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-frame-body-right col-6">
+      <div class="notification-cards">
+        <% if @notifications.any? %>
+          <% @notifications.each do |notification| %>
+          <div type="button" data-bs-toggle="modal" data-bs-target="#notification-<%= notification.id %>">
+            <div class="notification-card">
+              <div class="overlay">
+                <div class="notification-card-description justify-content-center">
+                  <p><%= notification.description %></p>
                 </div>
               </div>
-            <!-- Modal -->
-            <%= render 'modal', notification: notification %>
+              <div class="card-notification-card-site">
+                  <p><strong>URL:  </strong> <%= notification.site.url  %></p>
+              </div>
+              <div class="notification-card-site-accessdate">
+                <p><strong><i class="fas fa-history"></i></strong><%= notification.accessed_at.strftime("%F %H:%M")  %></p>
+              </div>
             </div>
+          <!-- Modal -->
+          <%= render 'modal', notification: notification %>
+          </div>
           <% end %>
-        </div>
-      <% else %>
-        <h2>No notifications yet.</h2>
-      <% end %>
-      <!--new site button-->
-      <%# <div class="list-new-entry">
-        <button type="button" class="new-site scale-btn btn btn-light" data-bs-toggle="modal" data-bs-target="#new">
-          <i class="fas fa-plus-square"></i>
-        </button>
-      </div>
-      <%= render 'sites/new', site: @new_site %>
-    </div>
-
-    <div class=".col-6 .col-md-4 profile-card">
-      <div class="profile-card-content">
-      <% if current_user.care_receiver.nil? %>
-      <%= render 'current_user_profile' %>
-      <% else %>
-      <%= render 'care_receiver_profile' %>
-      <% end %>
+        <% else %>
+          <h2>No notifications yet.</h2>
+        <% end %>
       </div>
     </div>
   </div>

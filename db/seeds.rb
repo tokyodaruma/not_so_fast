@@ -96,7 +96,7 @@ request = "https://endpoint.apivoid.com/urlrep/v1/pay-as-you-go/?key=#{api_key}&
 risk_results_serialized = URI.parse(request).open.read
 results = JSON.parse(risk_results_serialized)
 
-10.times do
+30.times do
   chosen_user = [satoka, jennifer, zach, antonio].sample
   notification = Notification.create!(
     user_id: chosen_user.id,

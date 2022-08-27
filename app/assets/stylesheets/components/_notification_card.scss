@@ -30,10 +30,11 @@
 }
 
 .notification-cards h2 {
-  font-size: 24px;
+  font-size: 40px;
   font-weight: bold;
-  margin-top: 32px;
+  margin: 16px;
   align-self: center;
+
 }
 
 .notification-card .card-notification-infos {
@@ -68,9 +69,6 @@
 .notification-card .card-notification-site-accessdate {
 
 }
-
-
-
 
 // // Smallest device
 // @media (min-width: 100px) and (max-width: 575px) {

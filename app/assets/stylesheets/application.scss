@@ -15,3 +15,31 @@
 body {
 background-image: url("");
 }
+
+.page-frame-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.page-frame-header {
+  padding: 0px 8px;
+}
+
+.page-frame-body {
+  .page-frame-body-right{
+    flex-grow: 1;
+    overflow: scroll;
+    height: 675px;
+  }
+  .page-frame-body-left {
+  }
+}
+
+.page-frame-footer {
+  padding: 8px;
+}
+
+.row {
+  width: 100%;
+}
