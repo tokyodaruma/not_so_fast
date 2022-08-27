@@ -1,0 +1,7 @@
+# config/meta.yml
+
+meta_product_name: "NotSofast"
+meta_title: "NotSoFast"
+meta_description: "Elder scams cyber security credit card fraud"
+meta_image: "not_so_fast_logo.svg" # should exist in `app/assets/images/`
+twitter_account: "@product_twitter_account"   # required for Twitter Cards
