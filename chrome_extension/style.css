@@ -1,8 +1,8 @@
 body {
-  background-color:#BED8D4;
-  padding: 20px;
+  background-color:white;
+  padding: 5px;
   width: 200px;
-  height: 200px;
+  height: 40px;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -14,21 +14,11 @@ body {
 
 button#clickMe {
   background: #2081C3;
-  width: 50%;
+  width: 100%;
   padding: 10px;
   border: 0;
-  border-radius: 50px;
+  border-radius: 4px;
   cursor: pointer;
   color: white;
   outline: none !important;
-}
-
-div {
-  display: flex;
-  justify-content: center;
-}
-
-img {
-  display: flex;
-  justify-content: flex-start;
 }

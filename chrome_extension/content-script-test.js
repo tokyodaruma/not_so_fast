@@ -47,7 +47,7 @@ const blocked_site = `
     style="display: flex;
     justify-content: center;
     border-radius: 18px;
-    background-color: grey;
+    background-color: #BED8D4;
     margin-left: auto;
     margin-right: auto;
     align-items: center;
@@ -71,7 +71,7 @@ const blocked_site = `
         </g>
       </g>
     </svg>
-      <h1>NotSofast malicious  blocked</h1>
+      <h1>Suspicius site blocked</h1>
   </div>
 </body>
 `;
