@@ -43,6 +43,66 @@ const checkIfSiteIsBlocked = new Request('https://www.notsofast.co/api/v1/sites'
     console.log('There was an error', error);
   });
 
+  const createNotificationAlertModal = () => {
+    const modal = document.createElement("dialog");
+    modal.setAttribute(
+    "style",`
+    height: 500px;
+    width: 500px;
+    border: none;
+    top:150px;
+    border-radius:20px;
+    background-color:white;
+    position: fixed; box-shadow: 0px 12px 48px rgba(29, 5, 64, 0.32);
+    `
+    );
+    modal.innerHTML = `
+    <iframe id="popup-content"; style="height: 100%; width: 100%;"></iframe>
+    <div style="position:absolute; top:0px; left:5px;">
+      <button style="margin: 8px; padding: 8px 12px; font-size: 16px; border: none; border-radius: 20px;">x</button>
+    </div>
+    `;
+    document.body.appendChild(modal);
+    const dialog = document.querySelector("dialog");
+    dialog.showModal();
+    const iframe = document.getElementById("popup-content");
+    iframe.srcdoc = `
+    <body style="background-color: #BED8D4;">
+      <div class="blocked"
+        style="display: flex;
+        justify-content: center;
+        border-radius: 18px;
+        margin-left: auto;
+        margin-right: auto;
+        align-items: center;
+        flex-direction: column;">
+        <h1 style="text-align: center; font-family: Helvetica Neue">NotSoFast</h1>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+        width="150px" height="150px" viewBox="0 0 478.125 478.125" style="enable-background:new 0 0 478.125 478.125;"
+        xml:space="preserve">
+          <g>
+            <g>
+              <g>
+                <circle cx="239.904" cy="314.721" r="35.878"/>
+                <path d="M256.657,127.525h-31.9c-10.557,0-19.125,8.645-19.125,19.125v101.975c0,10.48,8.645,19.125,19.125,19.125h31.9
+                  c10.48,0,19.125-8.645,19.125-19.125V146.65C275.782,136.17,267.138,127.525,256.657,127.525z"/>
+                <path d="M239.062,0C106.947,0,0,106.947,0,239.062s106.947,239.062,239.062,239.062c132.115,0,239.062-106.947,239.062-239.062
+                  S371.178,0,239.062,0z M239.292,409.734c-94.171,0-170.595-76.348-170.595-170.596c0-94.248,76.347-170.595,170.595-170.595
+                  s170.595,76.347,170.595,170.595C409.887,333.387,333.464,409.734,239.292,409.734z"/>
+              </g>
+            </g>
+          </g>
+        </svg>
+          <h1 style="text-align: center; font-family: Helvetica Neue">This site is suspicious. We alerted your caretaker. We recommend leaving this site.</h1>
+      </div>
+    </body>
+    `;
+    iframe.frameBorder = 0;
+    dialog.querySelector("button").addEventListener("click", () => {
+      dialog.close();
+    });
+  }
+
   const pendingModal = () => {
     const modal = document.createElement("dialog");
     modal.setAttribute(
@@ -93,7 +153,7 @@ const checkIfSiteIsBlocked = new Request('https://www.notsofast.co/api/v1/sites'
             </g>
           </g>
         </svg>
-          <h1 style="text-align: center; font-family: Helvetica Neue">This site has been flagged as suspicious. We recommend leaving this site.</h1>
+          <h1 style="text-align: center; font-family: Helvetica Neue">This site was flagged as suspicious. We recommend leaving this site.</h1>
       </div>
     </body>
     `;
@@ -196,6 +256,7 @@ function checkRiskScore() {
         }
       }
       if (data.risk_score > 1) {
+        createNotificationAlertModal();
         createNotification(notifications);
       };
     })
