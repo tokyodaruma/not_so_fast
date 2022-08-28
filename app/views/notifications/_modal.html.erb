@@ -3,7 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="notification-<%= notification.id %>">Site URL</h5>
-        <p><%= notification.site.url %></p>
+        <p><%= URI.parse(notification.site.url).host %></p>
       </div>
       <div class="modal-header">
         <h5 class="modal-title" id="notification-<%= notification.id %>">Accessed at</h5>
