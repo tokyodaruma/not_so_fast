@@ -1,7 +1,7 @@
 {
   "name": "notsofast extension",
   "version": "1.0",
-  "description": "Check user's current URL",
+  "description": "Protect loved ones from suspicious sites",
   "manifest_version": 3,
   "icons": {
     "16": "images/icon_16x16.png",
@@ -14,7 +14,9 @@
   "permissions": [
     "tabs",
     "scripting",
-    "activeTab"
+    "activeTab",
+    "storage",
+    "notifications"
   ],
   "action": {
     "default_title": "notsofast extension",

@@ -23,6 +23,24 @@ button#clickMe {
   outline: none !important;
 }
 
+input#token {
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  padding: 4px;
+  width: 100%;
+  border: none;
+  border-radius: 4px;
+}
+
+input#email {
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  padding: 4px;
+  width: 100%;
+  border: none;
+  border-radius: 4px;
+}
+
 div {
   display: flex;
   justify-content: center;
