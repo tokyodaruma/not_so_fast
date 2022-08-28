@@ -3,45 +3,79 @@ let checkUrl = window.location.href;
 let referrerUrl = window.document.referrer;
 const isoDateString = new Date().toISOString();
 
+async function getUserToken(key) {
+  return new Promise((resolve) => {
+      chrome.storage.sync.get(['key'], resolve);
+  })
+      .then(result => {
+          if (key == null) return result;
+          else return result[key];
+      });
+}
+
+let passUserToken = getUserToken("key");
+
 const myHeaders = new Headers({
   'Content-Type': 'application/json',
-  'X-User-Token': '-NfWmiyLLQhpdGQpiwCk',
-  'X-User-Email': "fake@fake.me"
 });
 
-// create an object to check if a site is blocked
-const checkIfSiteIsBlocked = new Request('http://localhost:3000/api/v1/sites', {
-  method: 'GET',
-  headers: myHeaders
-  });
+passUserToken.then((result) => {
+  myHeaders.append('X-User-Token', `${result[0]}`)
+  myHeaders.append('X-User-Email', `${result[1]}`)
+  console.log(myHeaders.get('X-User-Token'));
+  console.log(myHeaders.get('X-User-Email'));
 
-const siteIsBlocked = fetch(checkIfSiteIsBlocked)
-  .then(checkStatus)
-  .then(response => response.json())
-  .then(sites => {
-    if (typeof sites !== "undefined") {
-      for (let count in sites) {
-        let url = new URL(sites[count].url);
-        if (sites[count].status=="blocked" && url.hostname == targetUrl) {
-          console.log("blocked");
-          return "blocked";
-        } else if (sites[count].status=="trusted" && url.hostname == targetUrl) {
-          console.log("trusted");
-          return "trusted";
-        } else if (sites[count].status == "pending" && url.hostname == targetUrl) {
-          return "pending"
+// create an object to check if a site is blocked
+  const checkIfSiteIsBlocked = new Request('http://localhost:3000/api/v1/sites', {
+    method: 'GET',
+    headers: myHeaders
+    });
+
+
+  const siteIsBlocked = fetch(checkIfSiteIsBlocked)
+    .then(checkStatus)
+    .then(response => response.json())
+    .then(sites => {
+      if (typeof sites !== "undefined") {
+        for (let count in sites) {
+          let url = new URL(sites[count].url);
+          if (sites[count].status=="blocked" && url.hostname == targetUrl) {
+            console.log("blocked");
+            return "blocked";
+          } else if (sites[count].status=="trusted" && url.hostname == targetUrl) {
+            console.log("trusted");
+            return "trusted";
+          } else if (sites[count].status == "pending" && url.hostname == targetUrl) {
+            return "pending"
+          }
         }
+        return "create notification"
       }
-      return "create notification"
-    }
-    else {
-      console.log('this hit');
-      return "create notification"
-    }
-  })
-  .catch((error) => {
-    console.log('There was an error', error);
-  });
+      else {
+        console.log('this hit');
+        return "create notification"
+      }
+    })
+    .catch((error) => {
+      console.log('There was an error', error);
+    });
+
+    siteIsBlocked
+      .then((result) => {
+        if (result=="blocked") {
+          document.documentElement.innerHTML = '';
+          document.documentElement.innerHTML = blocked_site;
+          document.documentElement.scrollTop = 0;
+        } else if (result=="trusted") {
+          console.log("do nothing");
+        } else if (result=="pending") {
+          pendingModal();
+        } else {
+          checkRiskScore();
+        }
+      })
+      .catch(err=>console.log(err))
+});
 
 const createNotificationAlertModal = () => {
   const modal = document.createElement("dialog");
@@ -199,22 +233,6 @@ const blocked_site = `
   </div>
 </body>
 `;
-
-siteIsBlocked
-  .then((result) => {
-    if (result=="blocked") {
-      document.documentElement.innerHTML = '';
-      document.documentElement.innerHTML = blocked_site;
-      document.documentElement.scrollTop = 0;
-    } else if (result=="trusted") {
-      console.log("do nothing");
-    } else if (result=="pending") {
-      pendingModal();
-    } else {
-      checkRiskScore();
-    }
-  })
-  .catch(err=>console.log(err))
 
 // create an object to store the risk score
 function checkRiskScore() {
