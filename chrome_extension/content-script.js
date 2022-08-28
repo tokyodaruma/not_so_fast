@@ -22,8 +22,6 @@ const myHeaders = new Headers({
 passUserToken.then((result) => {
   myHeaders.append('X-User-Token', `${result[0]}`)
   myHeaders.append('X-User-Email', `${result[1]}`)
-  console.log(myHeaders.get('X-User-Token'));
-  console.log(myHeaders.get('X-User-Email'));
 
 // create an object to check if a site is blocked
   const checkIfSiteIsBlocked = new Request('https://www.notsofast.co/api/v1/sites', {
