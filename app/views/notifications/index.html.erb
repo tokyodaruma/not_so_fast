@@ -2,19 +2,19 @@
   <div class="row">
     <div class="page-frame-body-left col-6">
       <div class="page-frame-body-left-up">
-      <div class="row">
-        <div class="profile-card col-6">
-          <div class="profile-card-content d-flex flex-column">
-            <% if current_user.care_receiver.nil? %>
-            <%= render 'current_user_profile' %>
-            <% else %>
-            <%= render 'care_receiver_profile' %>
-            <% end %>
+        <div class="row">
+          <div class="profile-card col-6">
+            <div class="profile-card-content d-flex flex-column">
+              <% if current_user.care_receiver.nil? %>
+                <%= render 'current_user_profile' %>
+              <% else %>
+                <%= render 'care_receiver_profile' %>
+              <% end %>
+            </div>
+          </div>
+          <div class="col-6">
           </div>
         </div>
-        <div class="col-6">
-        </div>
-      </div>
       </div>
       <div class="page-frame-body-left-bottom">
         <div class="analytics-cards">
@@ -29,36 +29,60 @@
                                       curve: false,
                                       points: false,
                                       loading: "Fetching notifications..." %>
-
           </div>
         </div>
       </div>
     </div>
     <div class="page-frame-body-right col-6">
-      <div class="notification-cards">
-        <% if @notifications.any? %>
-          <% @notifications.each do |notification| %>
-          <div type="button" data-bs-toggle="modal" data-bs-target="#notification-<%= notification.id %>">
-            <div class="notification-card">
-              <div class="overlay">
-                <div class="notification-card-description justify-content-center">
-                  <p><%= notification.description %></p>
-                </div>
-              </div>
-              <div class="card-notification-card-site">
-                  <p><strong>URL:  </strong> <%= URI.parse(notification.site.url).host  %></p>
-              </div>
-              <div class="notification-card-site-accessdate">
-                <p><strong><i class="fas fa-history"></i></strong><%= notification.accessed_at.strftime("%F %H:%M")  %></p>
+      <div class="page-frame-body-right-up">
+        <div class='my-legend'>
+          <div class='legend-title'>Risk Score Level</div>
+          <div class='legend-scale'>
+            <ul class='legend-labels'>
+              <li><span style="background: #fff10a;"></span>0-25</li>
+              <li><span style="background: #fec208;"></span>25-50</li>
+              <li><span style="background: #ff2d08;"></span>50-75</li>
+              <li><span style="background: #cf240a;"></span>75-100</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="page-frame-body-right-bottom">
+        <div class="notification-cards">
+          <% if @notifications.any? %>
+            <% @notifications.each do |notification| %>
+              <div type="button" data-bs-toggle="modal" data-bs-target="#notification-<%= notification.id %>">
+                <!-- Cards to change color depending on the risk score level -->
+                <% if notification.site.risk_score < 25 %>
+                  <div class="notification-card" style="border: 3px solid #fff10a;">
+                  <% elsif notification.site.risk_score < 50 %>
+                    <div class="notification-card" style="border: 3px solid #fec208;">
+                    <% elsif notification.site.risk_score < 75 %>
+                      <div class="notification-card" style="border: 3px solid #ff2d08;">
+                      <% else %>
+                        <div class="notification-card" style="border: 3px solid #cf240a">
+                        <% end %>
+                        <div class="notification-card-description justify-content-center">
+                          <p><%= notification.description %></p>
+                        </div>
+                        <div class="card-notification-card-site">
+                          <p><strong>URL:  </strong> <%= URI.parse(notification.site.url).host  %></p>
+                        </div>
+                        <div class="notification-card-site-accessdate">
+                          <p><strong><i class="fas fa-history"></i></strong><%= notification.accessed_at.strftime("%F %H:%M")  %></p>
+                        </div>
+                      </div>
+                      <!-- Modal -->
+                      <%= render 'modal', notification: notification %>
+                    </div>
+                  <% end %>
+                <% else %>
+                  <h2>No notifications yet.</h2>
+                <% end %>
               </div>
             </div>
-          <!-- Modal -->
-          <%= render 'modal', notification: notification %>
           </div>
-          <% end %>
-        <% else %>
-          <h2>No notifications yet.</h2>
-        <% end %>
+        </div>
       </div>
     </div>
   </div>
