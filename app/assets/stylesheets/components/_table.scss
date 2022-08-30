@@ -38,3 +38,8 @@ h1 {
   filter: drop-shadow(2px 4px 6px grey);
   font-size: 32px;
 }
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}
