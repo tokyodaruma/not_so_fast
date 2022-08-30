@@ -7,8 +7,7 @@
 <% end %>
 <div class="care-receiver-info">
   <h2><%= current_user.care_receiver.relationship %> <%= current_user.care_receiver.last_name %></h2>
-  <p>Phone: <%= current_user.phone_number %> </p>
-  <p>Last active: August 19th, 2022</p>
-  <p>22 notifications reviewed in the last week.</p>
+  <p>Phone: +1 816-555-5555</p>
+  <p>Last active: <%= @notifications.first.accessed_at.strftime("%F %H:%M") %> </p>
   <p class="chrome-ext-token"><%= current_user.authentication_token %></p>
 </div>
