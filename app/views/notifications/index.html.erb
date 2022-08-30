@@ -35,16 +35,35 @@
       </div>
     </div>
     <div class="page-frame-body-right col-6">
+
+    <div class='my-legend'>
+  <div class='legend-title'>Risk Score Level</div>
+  <div class='legend-scale'>
+    <ul class='legend-labels'>
+      <li><span style="background: #fff10a;"></span>0-25</li>
+      <li><span style="background: #fec208;"></span>25-50</li>
+      <li><span style="background: #ff2d08;"></span>50-75</li>
+      <li><span style="background: #cf240a;"></span>75-100</li>
+    </ul>
+  </div>
+</div>
       <div class="notification-cards">
         <% if @notifications.any? %>
           <% @notifications.each do |notification| %>
           <div type="button" data-bs-toggle="modal" data-bs-target="#notification-<%= notification.id %>">
-            <div class="notification-card">
-              <div class="overlay">
+            <!-- Cards to change color depending on the risk score level -->
+          <% if notification.site.risk_score < 25 %>
+          <div class="notification-card" style="border: solid #fff10a;">
+          <% elsif notification.site.risk_score < 50 %>
+          <div class="notification-card" style="border: solid #fec208;">
+          <% elsif notification.site.risk_score < 75 %>
+          <div class="notification-card" style="border: solid #ff2d08;">
+          <% else %>
+          <div class="notification-card" style="border: solid #cf240a">
+          <% end %>
                 <div class="notification-card-description justify-content-center">
                   <p><%= notification.description %></p>
                 </div>
-              </div>
               <div class="card-notification-card-site">
                   <p><strong>URL:  </strong> <%= URI.parse(notification.site.url).host  %></p>
               </div>
