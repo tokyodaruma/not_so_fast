@@ -33,3 +33,17 @@
     width: 100%;
     height: 390px;
   }
+
+  .analytics-cards-notifications {
+    background-color: white;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(9, 9, 9, 0.2);
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    width: 100%;
+    margin-right: 8px;
+    grid-row: auto;
+    padding: 0px 16px 0px 0px;
+  }

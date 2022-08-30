@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="page-frame-body-left-bottom">
-        <div class="analytics-cards">
+        <div class="analytics-cards-notifications" style="border: 3px solid #f7f9f9;">
           <div class="analytics-card">
             <%= line_chart Notification.where(user: current_user)
                                       .group_by_day(:accessed_at)
@@ -26,9 +26,12 @@
                                       xmax: Date.today,
                                       xtitle: "Last 7 days",
                                       ytitle: "# of notifications",
+                                      max: 10,
                                       curve: false,
                                       points: false,
-                                      loading: "Fetching notifications..." %>
+                                      loading: "Fetching notifications...",
+                                      colors: ["#000000"],
+                                      title: "Notifications in Last 7 Days" %>
           </div>
         </div>
       </div>
