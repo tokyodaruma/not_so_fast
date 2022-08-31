@@ -99,7 +99,13 @@ const createNotificationAlertModal = () => {
   dialog.showModal();
   const iframe = document.getElementById("popup-content");
   iframe.srcdoc = `
-  <body style="background-color: #BED8D4;">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+  </head>
+  <body class="animate__animated animate__bounceInDown" style="background-color: #BED8D4;">
     <div class="blocked"
       style="display: flex;
       justify-content: center;
@@ -159,7 +165,13 @@ const pendingModal = () => {
   dialog.showModal();
   const iframe = document.getElementById("popup-content");
   iframe.srcdoc = `
-  <body style="background-color: #BED8D4;">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+  </head>
+  <body class="animate__animated animate__bounceInDown" style="background-color: #BED8D4;">
     <div class="blocked"
       style="display: flex;
       justify-content: center;
@@ -196,6 +208,12 @@ const pendingModal = () => {
 }
 
 const blocked_site = `
+<head>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+</head>
 <body style="background-color: #BED8D4;">
   <div class="blocked"
     style="display: flex;
@@ -210,8 +228,8 @@ const blocked_site = `
     color: black;
     height: 500px;
     width: 500px;">
-    <h1 style="text-align: center; font-family: Helvetica Neue">NotSoFast</h1>
-    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    <h1 class="animate__animated animate__bounceIn" style="text-align: center; font-family: Helvetica Neue">NotSoFast</h1>
+    <svg version="1.1" class="animate__animated animate__flip" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
     width="150px" height="150px" viewBox="0 0 478.125 478.125" style="enable-background:new 0 0 478.125 478.125;"
     xml:space="preserve">
       <g>
@@ -227,7 +245,7 @@ const blocked_site = `
         </g>
       </g>
     </svg>
-      <h1 style="text-align: center; font-family: Helvetica Neue">Your caretaker blocked this suspicious site.</h1>
+      <h1 class="animate__animated animate__bounceIn" style="text-align: center; font-family: Helvetica Neue">Your caretaker blocked this suspicious site.</h1>
   </div>
 </body>
 `;
