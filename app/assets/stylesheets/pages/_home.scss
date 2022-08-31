@@ -1,5 +1,5 @@
 body {
-  background: $not-so-fast-bg; 
+  background: $not-so-fast-bg;
 }
 .timeline {
   margin: 0 auto;
@@ -17,8 +17,8 @@ body {
 
 .timeline__component--bg {
   padding: 1.5em;
-  background: rgba(255, 255, 255, 0.2);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  background: rgba(255, 255, 255, 255);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0 / 1%);
   border-radius: 10px;
 }
 
