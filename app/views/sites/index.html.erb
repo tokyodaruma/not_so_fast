@@ -20,7 +20,7 @@
                 <button class="nav-link" id="nav-trust-tab" data-bs-toggle="tab" data-bs-target="#nav-trust" type="button" role="tab" aria-controls="nav-trust" aria-selected="false">Trust</button>
             </div>
           </nav>
-    <!-- Blocked sites -->
+          <!-- Blocked sites -->
           <div class="tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-block" role="tabpanel" aria-labelledby="nav-block-tab">
               <table class="table table-striped">
@@ -96,56 +96,37 @@
           </div>
         </div>
       </div>
-      <!--Pagination-->
-      <div class="pagination">
-      <nav aria-label="...">
-      <nav aria-label="...">
-        <ul class="pagination pagination-xs">
-          <li class="page-item active" aria-current="page">
-            <span class="page-link">1</span>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-        </ul>
-      </nav>
-      </div>
       <h1>Analytics</h1>
       <div class="analytics-card-sites">
         <div class="row">
           <div class="col">
             <div class="analytics-card-space">
               <h2> Domain TLD </h2>
-                  <%= pie_chart @tlds, width: "300px", height: "300px" %>
-            </div>
-          </div>
-          <div class="col">
-            <div class="analytics-card-space">
-              <h2>Recent Domain?</h2>
-                <%=  pie_chart @domain_recent, width: "300px", height: "300px" %>
+                  <%= column_chart @tlds, width: "300px", height: "300px" %>
             </div>
           </div>
           <div class="col">
             <div class="analytics-card-space">
               <h2> Keywords </h2>
               <%= column_chart @keywords, width: "300px", height: "300px" %>
-                <%#= bar_chart Site.group(:webpage_title).sum(:risk_score), xtitle: "Risk score", ytitle: "Keyword", width: "300px", height: "300px" %>
+              <button type="button" class="btn btn-secondary", width="20px" >Add to Blacklist</button>
             </div>
           </div>
+        </div>
+        <div class="row">
           <div class="col">
             <div class="analytics-card-space">
               <h2> Site visited</h2>
-                <%= line_chart @sites_visited, width: "300px", height: "300px", xtitle: "Hour", ytitle: "Count" %>
+                <%= line_chart @sites_visited, width: "300px", height: "300px", xtitle: "Time", ytitle: "Visits" %>
             </div>
           </div>
           <div class="col">
             <div class="analytics-card-space">
-              <h2> Referral Site </h2>
-                <%= bar_chart @referral_site, width: "300px", height: "300px" %>
+              <h2> Last Visited Site Top5 </h2>
+              <div class="top-5"><i class="fas fa-crown"></i> 1 2 3 4 5</div>
+                <%= column_chart @referral_site, width: "300px", height: "300px" %>
             </div>
-            </div>
-            <div class="col">
             </div>
           </div>
         </div>
       </div>
-    </div>

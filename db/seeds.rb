@@ -100,12 +100,14 @@ suspicious_sites = [
   "https://frogbaby.info/oop/20936_md/101/368/3591/38/150341"
 ]
 
+referral_sites = ["targat.com", "gardening.com", "amzon.com", "fabebok.com", "yahuu.com"]
 suspicious_sites.each do |site|
   api_key = ENV['APIVOID_KEY']
   request = "https://endpoint.apivoid.com/urlrep/v1/pay-as-you-go/?key=#{api_key}&url=#{site}"
   risk_results_serialized = URI.parse(request).open.read
   results = JSON.parse(risk_results_serialized)
 
+  5.times do
   notification = Notification.create!(
     user_id: zach.id,
     accessed_at: Faker::Date.between(from: '2022-08-22', to: '2022-08-27'),
@@ -113,19 +115,20 @@ suspicious_sites.each do |site|
     read: false
   )
 
-  site = Site.create!(
+ Site.create!(
     status: :pending,
     user_id: zach.id,
     notification: notification,
     reason: "#{results['data']['report']['domain_blacklist']['detections']} other site(s) flagged this as a risky URL",
     url: site,
-    referral_site: Faker::Internet.domain_name,
+    referral_site: referral_sites.sample,
     detections: results["data"]["report"]["domain_blacklist"]["detections"],
     risk_score: results["data"]["report"]["risk_score"]["result"],
     is_domain_recent: results["data"]["report"]["security_checks"]["is_domain_recent"],
     created_at: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :short),
     webpage_title: results["data"]["report"]["web_page"]["title"]
   )
+  end
 
-  puts "Notification ##{notification.id} and Site ##{site.id} made."
+  puts "Notification notification.id and Site site.id made."
 end

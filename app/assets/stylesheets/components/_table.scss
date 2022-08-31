@@ -1,6 +1,12 @@
 .sites-container {
-  margin-left: 100px;
-	margin-right: 100px;
+  background-color: transparent;
+  border-radius: 8px;
+  margin: 0 48px 0 48px;
+  padding: 0 80px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
 
 h1 {
   text-align: left;
@@ -27,11 +33,23 @@ h1 {
   text-align: left;
 }
 
-.table-striped th,
+
 .table-striped td {
   background-color: #f4f8f8;
   text-align: start;
-  padding: 15px;
+  padding-top: 35px;
+  padding-left: 20px;
+}
+
+.table-striped th {
+  background-color: #f4f8f8;
+  text-align: start;
+  padding: 20px 0 20px 20px;
+  padding-left: 20px;
+}
+
+.table-striped td:nth-last-child(1) {
+padding: 10px;
 }
 
 .icon-shadow {
