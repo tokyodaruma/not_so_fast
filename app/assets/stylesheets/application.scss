@@ -28,6 +28,10 @@ background-image: url("");
 
 .page-frame-body {
   .page-frame-body-right{
+    display: flex;
+    flex-direction: column;
+  }
+  .page-frame-body-right-bottom{
     flex-grow: 1;
     overflow: scroll;
     height: 675px;
