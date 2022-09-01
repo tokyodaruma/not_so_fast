@@ -1,5 +1,8 @@
 .my-legend {
   margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .my-legend .legend-title {
