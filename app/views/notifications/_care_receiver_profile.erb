@@ -11,7 +11,7 @@
   <% if @notifications.any? %>
     <p>Latest notification: <%= @notifications.first.accessed_at.strftime("%F %H:%M") %> </p>
   <% else %>
-    <p>No notifications!</p>
+    <p>Grandma is safe</p>
   <% end %>
   <p class="chrome-ext-token"><%= current_user.authentication_token %></p>
 </div>
