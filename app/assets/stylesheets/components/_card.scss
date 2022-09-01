@@ -28,3 +28,8 @@
 .flex-grow {
   flex-grow: 1;
 }
+
+.blocked-or-trusted-sites {
+  overflow: scroll;
+  height: 800px;
+}

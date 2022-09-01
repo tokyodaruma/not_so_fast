@@ -7,7 +7,8 @@
   border-radius: 10px;
   width: 100%;
   margin-right: 8px;
-  grid-row: auto
+  grid-row: auto;
+  overflow: scroll;
   p {
     margin-top: 0px;
     margin-bottom: 1rem;
@@ -21,7 +22,51 @@
   padding: 10px;
   box-shadow: 0 0 15px rgba(9, 9, 9, 0.2);
   border-radius: 10px;
+  position: relative;
 }
+
+.risk-score-level-one {
+  border-right: 32px solid #fff10a;
+  &:hover {
+    border-right: 60px solid #fff10a;
+    transition: .5s ease;
+  }
+}
+
+.risk-score-level-two {
+  border-right: 32px solid #fec208;
+  &:hover {
+    border-right: 60px solid #fec208;
+    transition: .5s ease;
+  }
+}
+
+.risk-score-level-three {
+  border-right: 32px solid #ff2d08;
+  &:hover {
+    border-right: 60px solid #ff2d08;
+    transition: .5s ease;
+  }
+}
+
+.risk-score-level-four {
+  border-right: 32px solid #cf240a;
+  &:hover {
+    border-right: 60px solid #cf240a;
+    transition: .5s ease;
+  }
+}
+
+// .overlay {
+//   position: absolute;
+//   bottom: 0;
+//   left: 100%;
+//   right: 0;
+//   overflow: hidden;
+//   width: 0;
+//   height: 100%;
+//   transition: .5s ease;
+// }
 
 .notification-card:hover .notification-card-infos{
   transform: translateY(0%);
