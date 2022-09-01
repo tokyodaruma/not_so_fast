@@ -90,27 +90,109 @@ puts "Creating Carereceiver"
   )
   zach_grandma.save!
 
-suspicious_sites = [
+suspicious_sites_redirect_from_email = [
   "https://posterbest.info/oop/21401_md/101/359/3613/38/150341",
-  "https://girlscute.info/oop/21313_md/101/368/3591/38/150341",
   "https://duckstar.info/oop/21223_md/101/368/3591/38/150341",
-  "https://cafewife.info/oop/21144_md/101/368/3591/38/150341",
   "https://littlepoof.info/oop/21074_md/101/368/3591/38/150341",
   "https://tangosave.info/oop/21027_md/101/368/3591/38/150341",
   "https://frogbaby.info/oop/20936_md/101/368/3591/38/150341"
 ]
 
+suspicious_sites_lotto = [
+  "https://molottery.com/",
+  "https://powerballl.com/",
+  "http://www.sports-buzz-blog.com",
+  "http://www.highperformancegate.com",
+  "http://www.lottolotto.com",
+  "http://www.lotteryfun.net",
+  "http://www.misourilotto.com",
+  "http://www.molottery.net"
+]
+
+lotto_titles = [
+  "WIN NOW",
+  "Win big!",
+  "Claim your jackpot"
+]
+
+suspicious_sites_charity = [
+  "https://www.donateacar2charity.com/kansas-city-car-donation-information.php",
+  "http://www.donate.me",
+  "http://www.donatenow.com",
+  "http://www.donatecash.com"
+]
+
 referral_sites = ["targat.com", "gardening.com", "amzon.com", "fabebok.com", "yahuu.com"]
-suspicious_sites.each do |site|
+
+suspicious_sites_redirect_from_email.each do |site|
   api_key = ENV['APIVOID_KEY']
   request = "https://endpoint.apivoid.com/urlrep/v1/pay-as-you-go/?key=#{api_key}&url=#{site}"
   risk_results_serialized = URI.parse(request).open.read
   results = JSON.parse(risk_results_serialized)
 
-  5.times do
   notification = Notification.create!(
     user_id: zach.id,
-    accessed_at: Faker::Date.between(from: '2022-08-22', to: '2022-08-27'),
+    accessed_at: Faker::Date.between(from: '2022-08-27', to: '2022-08-27'),
+    description: "Redirected from suspicious email.",
+    read: false
+  )
+
+ Site.create!(
+    status: :pending,
+    user_id: zach.id,
+    notification: notification,
+    reason: "Redirected from suspicious email.",
+    url: site,
+    referral_site: ["email"],
+    detections: results["data"]["report"]["domain_blacklist"]["detections"],
+    risk_score: results["data"]["report"]["risk_score"]["result"],
+    is_domain_recent: results["data"]["report"]["security_checks"]["is_domain_recent"],
+    created_at: Faker::Time.between_dates(from: Date.today - 6, to: Date.today - 5, period: :morning, format: :short),
+    webpage_title: "CREDIT CARD INFO NEEDED"
+  )
+
+  puts "Email notification notification.id and email site site.id made."
+end
+
+suspicious_sites_lotto.each do |site|
+  api_key = ENV['APIVOID_KEY']
+  request = "https://endpoint.apivoid.com/urlrep/v1/pay-as-you-go/?key=#{api_key}&url=#{site}"
+  risk_results_serialized = URI.parse(request).open.read
+  results = JSON.parse(risk_results_serialized)
+
+  notification = Notification.create!(
+    user_id: zach.id,
+    accessed_at: Faker::Date.between(from: '2022-08-31', to: '2022-09-01'),
+    description: "Suspicious lottery related site.",
+    read: false
+  )
+
+ Site.create!(
+    status: :pending,
+    user_id: zach.id,
+    notification: notification,
+    reason: "Suspicious lottery related site.",
+    url: site,
+    referral_site: referral_sites.sample,
+    detections: results["data"]["report"]["domain_blacklist"]["detections"],
+    risk_score: results["data"]["report"]["risk_score"]["result"],
+    is_domain_recent: results["data"]["report"]["security_checks"]["is_domain_recent"],
+    created_at: Faker::Time.between_dates(from: Date.today - 2, to: Date.today - 1, period: :morning, format: :short),
+    webpage_title: lotto_titles.sample
+  )
+
+  puts "Lotto notification notification.id and lotto site site.id made."
+end
+
+suspicious_sites_charity.each do |site|
+  api_key = ENV['APIVOID_KEY']
+  request = "https://endpoint.apivoid.com/urlrep/v1/pay-as-you-go/?key=#{api_key}&url=#{site}"
+  risk_results_serialized = URI.parse(request).open.read
+  results = JSON.parse(risk_results_serialized)
+
+  notification = Notification.create!(
+    user_id: zach.id,
+    accessed_at: Faker::Date.between(from: '2022-08-27', to: '2022-08-30'),
     description: "#{results['data']['report']['domain_blacklist']['detections']} other site(s) flagged this as a risky URL",
     read: false
   )
@@ -119,16 +201,15 @@ suspicious_sites.each do |site|
     status: :pending,
     user_id: zach.id,
     notification: notification,
-    reason: "#{results['data']['report']['domain_blacklist']['detections']} other site(s) flagged this as a risky URL",
+    reason: "Suspicious charity related site.",
     url: site,
     referral_site: referral_sites.sample,
-    detections: results["data"]["report"]["domain_blacklist"]["detections"],
+    detections: "Suspicious charity related site.",
     risk_score: results["data"]["report"]["risk_score"]["result"],
     is_domain_recent: results["data"]["report"]["security_checks"]["is_domain_recent"],
-    created_at: Faker::Time.between(from: DateTime.now - 1, to: DateTime.now, format: :short),
-    webpage_title: results["data"]["report"]["web_page"]["title"]
+    created_at: Faker::Time.between_dates(from: Date.today - 6, to: Date.today - 3, period: :morning, format: :short),
+    webpage_title: "Donate in KC now!"
   )
-  end
 
-  puts "Notification notification.id and Site site.id made."
+  puts "Charity notification notification.id and charity site site.id made."
 end

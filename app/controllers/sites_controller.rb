@@ -2,14 +2,13 @@ class SitesController < ApplicationController
   before_action :set_params, only: %i[update]
 
   def index
-
     tld = Site.where(user: current_user).pluck(:url).map { |url| URI.parse(url).host.split('.').last }.tally
     @tlds = tld.sort_by{|key, value| -value}
     @domain_recent = Site.where(user: current_user).group(:is_domain_recent).count
     source = Site.where(user: current_user).group(:referral_site).count
     @referral_site = source.sort_by{|key, value| -value}
-    @keywords = Site.where(user: current_user).group(:webpage_title).count
-    @sites_visited = Site.group_by_hour(:created_at, format: "%H %p").count.sort
+    @keywords = Site.where(status: :blocked).group(:webpage_title).count
+    @sites_visited = Site.where(status: :blocked).group_by_hour(:created_at, format: "%H %p").count.sort
     @sites = policy_scope(Site)
     @blocked_sites = @sites.where(status: :blocked)
     @trusted_sites = @sites.where(status: :trusted)
