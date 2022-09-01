@@ -10,35 +10,87 @@
       </ul>
     </div>
     <div class='legend-source'><a href="#link to source"></a></div>
-    </div>
-    <div class="row justify-content-center">
-      <div class="col-6">
-        <nav>
-          <div class="nav nav-tabs" id="nav-tab" role="tablist">
-              <button class="nav-link active" id="nav-block-tab" data-bs-toggle="tab" data-bs-target="#nav-block" type="button" role="tab" aria-controls="nav-block" aria-selected="true">Block</button>
-              <button class="nav-link" id="nav-trust-tab" data-bs-toggle="tab" data-bs-target="#nav-trust" type="button" role="tab" aria-controls="nav-trust" aria-selected="false">Trust</button>
-          </div>
-        </nav>
-        <!-- Blocked sites -->
+  </div>
+  <div class="row justify-content-center mx-0">
+    <div class="col-6 blocked-or-trusted-sites">
+      <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+          <button class="nav-link active" id="nav-block-tab" data-bs-toggle="tab" data-bs-target="#nav-block" type="button" role="tab" aria-controls="nav-block" aria-selected="true">Block</button>
+          <button class="nav-link" id="nav-trust-tab" data-bs-toggle="tab" data-bs-target="#nav-trust" type="button" role="tab" aria-controls="nav-trust" aria-selected="false">Trust</button>
+        </div>
+      </nav>
+      <!-- Blocked sites -->
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-block" role="tabpanel" aria-labelledby="nav-block-tab">
+          <table class="table table-striped">
+            <% if @blocked_sites.empty? %>
+              <p class="nothing-to-display">No blocked sites yet.</p>
+            <% else %>
+              <%= render 'table_header' %>
+            <% end %>
+            <tbody>
+              <% @blocked_sites.each_with_index do |site, index| %>
+                <tr>
+                  <% if site.risk_score <= 25 %>
+                    <td> <strong>
+                        <p style="color:#fff10a"><i class="fas fa-exclamation-triangle icon-shadow"></i> </p>
+                      </strong></td>
+                  <% elsif site.risk_score <= 50 %>
+                    <td> <strong>
+                        <p style="color:#fec208"><i class="fas fa-exclamation-triangle icon-shadow"></i></p>
+                      </strong></td>
+                  <% elsif site.risk_score <= 75 %>
+                    <td> <strong>
+                        <p style="color:#ff2d08"><i class="fas fa-exclamation-triangle icon-shadow"></i></p>
+                      </strong></td>
+                  <% else %>
+                    <td> <strong>
+                        <p style="color:#cf240a"><i class="fas fa-exclamation-triangle icon-shadow"></i></p>
+                      </strong></td>
+                  <% end %>
+                  <td><%= URI.parse(site.url).host %></td>
+                  <td><%= site.reason %></td>
+                  <td>
+                    <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#site-<%= site.id %>">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <%= render 'modal', site: site %>
+                  </td>
+                  <td><%= render "change_status", site: site, caption: "Unblock", status: :trusted %>
+                  </td>
+                </tr>
+              </tbody>
+            <% end %>
+          </table>
+        </div>
+        <!-- Trusted sites -->
         <div class="tab-content" id="nav-tabContent">
-          <div class="tab-pane fade show active" id="nav-block" role="tabpanel" aria-labelledby="nav-block-tab">
+          <div class="tab-pane fade" id="nav-trust" role="tabpanel" aria-labelledby="nav-trust-tab">
             <table class="table table-striped">
-              <% if @blocked_sites.empty? %>
-                <p class="nothing-to-display">No blocked sites yet.</p>
+              <% if @trusted_sites.empty? %>
+                <p class="nothing-to-display">No trusted sites yet.</p>
               <% else %>
                 <%= render 'table_header' %>
               <% end %>
               <tbody>
-                <% @blocked_sites.each_with_index do |site, index| %>
+                <% @trusted_sites.each_with_index do |site, index| %>
                   <tr>
                     <% if site.risk_score <= 25 %>
-                      <td> <strong> <p style="color:#fff10a"><i class="fas fa-exclamation-triangle icon-shadow"></i> </p> </strong></td>
+                      <td> <strong>
+                          <p style="color:#fff10a"> <i class="fas fa-exclamation-triangle icon-shadow"></i> </p>
+                        </strong></td>
                     <% elsif site.risk_score <= 50 %>
-                      <td> <strong> <p style="color:#fec208"><i class="fas fa-exclamation-triangle icon-shadow"></i></p> </strong></td>
+                      <td> <strong>
+                          <p style="color:#fec208"><i class="fas fa-exclamation-triangle icon-shadow"></i></p>
+                        </strong></td>
                     <% elsif site.risk_score <= 75 %>
-                      <td> <strong> <p style="color:#ff2d08"><i class="fas fa-exclamation-triangle icon-shadow"></i></p> </strong></td>
+                      <td> <strong>
+                          <p style="color:#ff2d08"><i class="fas fa-exclamation-triangle icon-shadow"></i></p>
+                        </strong></td>
                     <% else %>
-                      <td> <strong> <p style="color:#cf240a"><i class="fas fa-exclamation-triangle icon-shadow"></i></p> </strong></td>
+                      <td> <strong>
+                          <p style="color:#cf240a"><i class="fas fa-exclamation-triangle icon-shadow"></i></p>
+                        </strong></td>
                     <% end %>
                     <td><%= URI.parse(site.url).host %></td>
                     <td><%= site.reason %></td>
@@ -48,60 +100,26 @@
                       </button>
                       <%= render 'modal', site: site %>
                     </td>
-                    <td><%= render "change_status", site: site, caption: "Unblock", status: :trusted %>
+                    <td><%= render "change_status", site: site, caption: "Block", status: :blocked %>
                     </td>
                   </tr>
                 </tbody>
-                <% end %>
-              </table>
-            </div>
-          <!-- Trusted sites -->
-          <div class="tab-content" id="nav-tabContent">
-          <div class="tab-pane fade" id="nav-trust" role="tabpanel" aria-labelledby="nav-trust-tab">
-            <table class="table table-striped">
-                <% if @trusted_sites.empty? %>
-                  <p class="nothing-to-display">No trusted sites yet.</p>
-                <% else %>
-                  <%= render 'table_header' %>
-                <% end %>
-                <tbody>
-                  <% @trusted_sites.each_with_index do |site, index| %>
-                    <tr>
-                      <% if site.risk_score <= 25 %>
-                        <td> <strong> <p style="color:#fff10a"> <i class="fas fa-exclamation-triangle icon-shadow"></i> </p> </strong></td>
-                      <% elsif site.risk_score <= 50 %>
-                        <td> <strong> <p style="color:#fec208"><i class="fas fa-exclamation-triangle icon-shadow"></i></p> </strong></td>
-                      <% elsif site.risk_score <= 75 %>
-                        <td> <strong> <p style="color:#ff2d08"><i class="fas fa-exclamation-triangle icon-shadow"></i></p> </strong></td>
-                      <% else %>
-                        <td> <strong> <p style="color:#cf240a"><i class="fas fa-exclamation-triangle icon-shadow"></i></p> </strong></td>
-                      <% end %>
-                      <td><%= URI.parse(site.url).host %></td>
-                      <td><%= site.reason %></td>
-                      <td>
-                        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#site-<%= site.id %>">
-                          <i class="fas fa-edit"></i>
-                        </button>
-                        <%= render 'modal', site: site %>
-                      </td>
-                      <td><%= render "change_status", site: site, caption: "Block", status: :blocked %>
-                      </td>
-                    </tr>
-                </tbody>
-                <% end %>
-              </table>
-            </div>
+              <% end %>
+            </table>
           </div>
         </div>
       </div>
-      <div class="col-6 align-self-center" id="right-side-column">
+    </div>
+    <div class="col-6 align-self-center" id="right-side-column">
+      <div class="sites-analytics">
         <div class="analytics-card-space">
           <%= column_chart @keywords, width: "400px", height: "300px", title: "Keywords Found on Sites" %>
           <button type="button" class="btn btn-secondary", width="20px" >Block by Keyword</button>
         </div>
         <div class="analytics-card-visits-by-hour">
-          <%= column_chart @sites_visited, width: "600px", height: "300px", xtitle: "Hours in a day", ytitle: "Hits", title: "Attempted Visits to Suspicious Sites" %>
+          <%= column_chart @sites_visited, width: "400px", height: "300px", xtitle: "Hours in a day", ytitle: "Hits", title: "Attempted Visits to Suspicious Sites" %>
         </div>
       </div>
     </div>
+  </div>
 </div>

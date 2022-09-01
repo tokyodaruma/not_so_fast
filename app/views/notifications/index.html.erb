@@ -54,13 +54,13 @@
             <div type="button" data-bs-toggle="modal" data-bs-target="#notification-<%= notification.id %>">
               <!-- Cards to change color depending on the risk score level -->
               <% if notification.site.risk_score < 25 %>
-                <div class="notification-card" style="border-right: 32px solid #fff10a;">
+                <div class="notification-card risk-score-level-one">
                 <% elsif notification.site.risk_score < 50 %>
-                  <div class="notification-card" style="border-right: 32px solid #fec208;">
+                  <div class="notification-card risk-score-level-two">
                   <% elsif notification.site.risk_score < 75 %>
-                    <div class="notification-card" style="border-right: 32px solid #ff2d08;">
+                    <div class="notification-card risk-score-level-three">
                     <% else %>
-                      <div class="notification-card" style="border-right: 32px solid #cf240a">
+                      <div class="notification-card risk-score-level-four">
                       <% end %>
                       <div class="row">
                         <div class="col-sm-9">
