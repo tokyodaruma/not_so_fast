@@ -31,8 +31,21 @@
     background-color: #f7f9f9;
     border-radius: 8px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    width: 500px;
-    height: 500px;
+    width: 400px;
+    height: 400px;
+  }
+
+  .analytics-card-visits-by-hour {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    background-color: #f7f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 700px;
+    height: 350px;
   }
 
   .analytics-cards-notifications {
@@ -47,4 +60,8 @@
     margin-right: 8px;
     grid-row: auto;
     padding: 0px 16px 0px 0px;
+  }
+
+  div#right-side-column {
+    text-align: -webkit-center;
   }

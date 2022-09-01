@@ -1,8 +1,8 @@
 .sites-container {
   background-color: transparent;
   border-radius: 8px;
-  margin: 0 48px 0 48px;
-  padding: 0 80px;
+  margin: 0 48px 108px 48px;
+  padding: 0 6px;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
@@ -20,7 +20,7 @@ h1 {
   border-collapse: collapse;
   margin: 25px 0;
   font-size: 0.9em;
-  min-width: 80vw;
+  min-width: 40vw;
   border-radius: 8px;
   border: 1px solid transparent;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
@@ -28,21 +28,21 @@ h1 {
 }
 
 .styled-table thead tr {
-  background-color: #f4f8f8;
+  background-color: white;
   border-top-right-radius: 8px;
   text-align: left;
 }
 
 
 .table-striped td {
-  background-color: #f4f8f8;
+  background-color: white;
   text-align: start;
   padding-top: 35px;
   padding-left: 20px;
 }
 
 .table-striped th {
-  background-color: #f4f8f8;
+  background-color: white;
   text-align: start;
   padding: 20px 0 20px 20px;
   padding-left: 20px;
