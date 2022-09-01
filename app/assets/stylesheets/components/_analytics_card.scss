@@ -71,3 +71,15 @@
     padding-right: 0;
     text-align: -webkit-right;
   }
+
+  input.site-data-button {
+    color: #4A4A4A;
+    border: 1px solid #4A4A4A;
+    padding: 8px 24px;
+    border-radius: 8px;
+    font-weight: lighter;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+    font-size: 16px;
+    margin: 4px;
+}
