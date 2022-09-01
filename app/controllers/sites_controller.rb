@@ -8,7 +8,7 @@ class SitesController < ApplicationController
     source = Site.where(user: current_user).group(:referral_site).count
     @referral_site = source.sort_by{|key, value| -value}
     @keywords = Site.where(status: :blocked).group(:webpage_title).count
-    @sites_visited = Site.where(status: :blocked).group_by_hour(:created_at, format: "%H %p").count.sort
+    @sites_visited = Site.where(status: :blocked).group_by_hour_of_day(:created_at, format: "%H %p").count.sort
     @sites = policy_scope(Site)
     @blocked_sites = @sites.where(status: :blocked)
     @trusted_sites = @sites.where(status: :trusted)
