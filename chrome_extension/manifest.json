@@ -28,5 +28,11 @@
       "matches": ["<all_urls>"],
       "js": ["content-script.js"]
     }
+  ],
+  "web_accessible_resources": [
+    {
+    "resources": ["images/*"],
+    "matches": ["<all_urls>"]
+    }
   ]
-}
+  }

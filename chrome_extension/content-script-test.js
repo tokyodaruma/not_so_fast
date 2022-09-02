@@ -116,7 +116,7 @@ const createNotificationAlertModal = () => {
       margin-right: auto;
       align-items: center;
       flex-direction: column;">
-      <h1 style="text-align: center; font-family: Helvetica Neue">NotSoFast</h1>
+      <img id="logo" src="chrome-extension://__MSG_@@haikdfjjdehjglccolmilbddenjhnddh/images/not_so_fast_logo.svg" style="width: 200px;">
       <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
       width="150px" height="150px" viewBox="0 0 478.125 478.125" style="enable-background:new 0 0 478.125 478.125;"
       xml:space="preserve">
@@ -147,8 +147,8 @@ const pendingModal = () => {
   const modal = document.createElement("dialog");
   modal.setAttribute(
   "style",`
-  height: 500px;
-  width: 500px;
+  height: 600px;
+  width: 600px;
   border: none;
   top:150px;
   border-radius:20px;
@@ -182,7 +182,7 @@ const pendingModal = () => {
       margin-right: auto;
       align-items: center;
       flex-direction: column;">
-      <h1 style="text-align: center; font-family: Helvetica Neue">NotSoFast</h1>
+      <img id="logo" src="chrome-extension://__MSG_@@haikdfjjdehjglccolmilbddenjhnddh/images/not_so_fast_logo.svg" style="width: 200px;">
       <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
       width="150px" height="150px" viewBox="0 0 478.125 478.125" style="enable-background:new 0 0 478.125 478.125;"
       xml:space="preserve">
@@ -230,7 +230,7 @@ const blocked_site = `
     color: black;
     height: 500px;
     width: 500px;">
-    <h1 class="animate__animated animate__bounceIn" style="text-align: center; font-family: Helvetica Neue">NotSoFast</h1>
+    <img class="animate__animated animate__bounceIn" id="logo" src="chrome-extension://__MSG_@@haikdfjjdehjglccolmilbddenjhnddh/images/not_so_fast_logo.svg" style="width: 200px;">
     <svg version="1.1" class="animate__animated animate__flip" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
     width="150px" height="150px" viewBox="0 0 478.125 478.125" style="enable-background:new 0 0 478.125 478.125;"
     xml:space="preserve">
