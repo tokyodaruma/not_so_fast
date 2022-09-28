@@ -82,3 +82,5 @@ gem 'twilio-ruby', '~> 5.70.0'
 gem "chartkick"
 
 gem 'groupdate'
+gem 'sidekiq'
+gem 'sidekiq-failures', '~> 1.0'
