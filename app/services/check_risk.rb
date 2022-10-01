@@ -13,6 +13,8 @@ class CheckRisk < ApplicationService
     api_key = ENV['APIVOID_KEY']
     request = "https://endpoint.apivoid.com/urlrep/v1/pay-as-you-go/?key=#{api_key}&url=#{@url}"
     risk_results_serialized = URI.parse(request).open.read
+    # getResultsJob.perform_later(request)
+    # move line 15 to job file
     get_risk_score(JSON.parse(risk_results_serialized))
   end
 
